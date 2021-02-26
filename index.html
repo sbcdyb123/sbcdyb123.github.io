@@ -1,631 +1,149 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/null">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/null"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-02-26 17:56:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-2021面试复习笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/02/26/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="dt-published" datetime="2021-02-26T09:30:30.401Z" itemprop="datePublished">2021-02-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/26/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/">2021面试复习笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="全方面面试总结"><a href="#全方面面试总结" class="headerlink" title="全方面面试总结"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904070579240974#heading-25">全方面面试总结</a></h2><h2 id="1-javascript"><a href="#1-javascript" class="headerlink" title="1.javascript"></a><code>1.javascript</code></h2><h3 id="JS面试题"><a href="#JS面试题" class="headerlink" title="JS面试题"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903815053852685">JS面试题</a></h3><h3 id="JS面试题-1"><a href="#JS面试题-1" class="headerlink" title="JS面试题"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903958591324168#heading-5">JS面试题</a></h3><h3 id="手写无敌JS"><a href="#手写无敌JS" class="headerlink" title="手写无敌JS"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903809206976520#heading-5">手写无敌JS</a></h3><h3 id="javascript深入"><a href="#javascript深入" class="headerlink" title="javascript深入"></a><a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog">javascript深入</a></h3><h3 id="原始类型-基础类型"><a href="#原始类型-基础类型" class="headerlink" title="原始类型(基础类型)"></a>原始类型(基础类型)</h3><ul>
-<li><code>boolean</code></li>
-<li><code>null</code></li>
-<li><code>undefined</code></li>
-<li><code>number</code></li>
-<li><code>string</code></li>
-<li><code>symbol</code></li>
-</ul>
-<p>null不是对象类型,虽然 <code>typeof null</code> 会输出 <code>object</code>，但是这只是 JS 存在的一个悠久 Bug.</p>
-<h3 id="对象（Object）类型"><a href="#对象（Object）类型" class="headerlink" title="对象（Object）类型"></a>对象（Object）类型</h3><p>对象类型和原始类型不同的是，原始类型存储的是值，对象类型存储的是地址（<strong>指针</strong>）。</p>
-<h3 id="typeof-vs-instanceof"><a href="#typeof-vs-instanceof" class="headerlink" title="typeof vs instanceof"></a><code>typeof</code> vs <code>instanceof</code></h3><p>涉及面试题：<code>typeof</code> 是否能正确判断类型？<code>instanceof</code> 能正确判断对象的原理是什么？</p>
-<p><code>typeof</code> 对于原始类型来说，除了 <code>null</code> 都可以显示正确的类型</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="number">1</span> <span class="comment">// &#x27;number&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">&#x27;1&#x27;</span> <span class="comment">// &#x27;string&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span> <span class="comment">// &#x27;undefined&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">true</span> <span class="comment">// &#x27;boolean&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="built_in">Symbol</span>() <span class="comment">// &#x27;symbol&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>typeof</code> 对于对象来说，除了函数都会显示 <code>object</code>，所以说 <code>typeof</code> 并不能准确判断变量到底是什么类型</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> [] <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span> &#123;&#125; <span class="comment">// &#x27;object&#x27;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="built_in">console</span>.log <span class="comment">// &#x27;function&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>如果想判断一个对象的正确类型，这时候可以考虑使用 <code>instanceof</code>，因为内部机制是通过原型链来判断的，</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Person()</span><br><span class="line">p1 <span class="keyword">instanceof</span> Person <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">str <span class="keyword">instanceof</span> <span class="built_in">String</span> <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str1 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&#x27;hello world&#x27;</span>)</span><br><span class="line">str1 <span class="keyword">instanceof</span> <span class="built_in">String</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p><img src="https://user-gold-cdn.xitu.io/2018/11/15/16716dec14421e47?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
-<h4 id="vs"><a href="#vs" class="headerlink" title="==vs==="></a>==vs===</h4><ol>
-<li><p>首先会判断两者类型是否<strong>相同</strong>。相同的话就是比大小了</p>
-</li>
-<li><p>类型不相同的话，那么就会进行类型转换</p>
-</li>
-<li><p>会先判断是否在对比 <code>null</code> 和 <code>undefined</code>，是的话就会返回 <code>true</code></p>
-</li>
-<li><p>判断两者类型是否为string和number，是的话就会将字符串转换为number</p>
-</li>
-<li><p>判断其中一方是否为boolean，是的话就会把boolean转为number</p>
-</li>
-<li><p>判断其中一方是否为 <code>object</code> 且另一方为 <code>string</code>、<code>number</code> 或者 <code>symbol</code>，是的话就会把 <code>object</code> 转为原始类型再进行判断</p>
-</li>
-</ol>
-<h4 id=""><a href="#" class="headerlink" title="[] == ![]"></a>[] == ![]</h4><p>①、根据运算符优先级 ，！ 的优先级是大于 == 的，所以先会执行 ![]</p>
-<p>！可将变量转换成boolean类型，null、undefined、NaN以及空字符串(‘’)取反都为true，其余都为false。</p>
-<p>所以 <strong>! [] 运算后的结果就是 false</strong></p>
-<p>也就是 [] == ! [] 相当于 [] == false</p>
-<p>②、根据上面提到的规则（<strong>如果有一个操作数是布尔值，则在比较相等性之前先将其转换为数值——false转换为0，而true转换为1</strong>），则需要把 false 转成 0</p>
-<p>也就是 [] == ! [] 相当于 [] == false 相当于 [] == 0</p>
-<p>③、根据上面提到的规则（**如果一个操作数是对象，另一个操作数不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面的规则进行比较，如果对象没有valueOf()方法，则调用 toString()**）</p>
-<p>而对于空数组，[].toString() -&gt; ‘’ (返回的是空字符串)</p>
-<p>也就是 [] == 0 相当于 ‘’ == 0</p>
-<p>④、根据上面提到的规则（<strong>如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转换为数值</strong>）</p>
-<p>Number(‘’) -&gt; 返回的是 0</p>
-<p>相当于 0 == 0 自然就返回 true了</p>
-<p><strong>总结一下：</strong></p>
-<p><strong>[] == ! []  -&gt;  [] == false -&gt; [] == 0 -&gt;  ‘’ == 0  -&gt; 0 == 0  -&gt; true</strong></p>
-<p>那么对于 {} == !{} 也是同理的</p>
-<p>关键在于 <strong>{}.toString()</strong> -&gt; NaN(返回的是NaN)</p>
-<p>根据上面的规则（<strong>如果有一个操作数是NaN，则相等操作符返回 false</strong>）</p>
-<p><strong>总结一下：</strong></p>
-<p><strong>{} == ! {}  -&gt;  {} == false -&gt; {} == 0 -&gt;  NaN == 0  -&gt; false</strong></p>
-<h3 id="执行上下文-EC"><a href="#执行上下文-EC" class="headerlink" title="执行上下文(EC)"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/tag/js/">执行上下文(EC)</a></h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/11438363.html">https://www.cnblogs.com/echolun/p/11438363.html</a></p>
-<p>执行上下文有三个种类，全局执行上下文，函数执行上下文，eval执行上下文，javascript在执行前，首先会创建全局执行上下文，也就是我们说的window，全局执行上下文会被压到执行栈的底部，当每函数被调用时会创建一个执行上下文，该执行上下文会压到全局上下文的顶部，执行完函数被弹出，符合先进后出原则，这种关系也叫做执行栈。执行上下文创建阶段主要是干了三件事，第一种确定this的指向，创建词法环境，创建变量环境，词法环境和变量环境都有一个外部环境引入记录，这个外部环境引入记录也可以称之为作用域。词法环境主要是用来定义let，const，function等变量，变量词法环境主要是用来定义var出来的变量。主要区别就是函数的词法环境多了一个argument的变量。    词法环境和变量环境的区别也可以来解释，为什么let，const有暂时性死区以及变量提升和函数提升的问题。因为词法环境定义了let，const但是并未初始化，但是function被定义并初始化了，变量词法环境中的var被声明了并且被设置了undefined。</p>
-<h3 id="作用域与作用域链"><a href="#作用域与作用域链" class="headerlink" title="作用域与作用域链"></a>作用域与作用域链</h3><p>作用域是变量和函数的作用域范围与生命周期且是在变量和函数被定义时所创建的而非代码执行时创建，作用域链是当在当前作用域查找某变量时，如果没找到就会去上层作用域找，此行为可以一直找到全局对象window（非严格模式），而这个查找过程也就是所谓的作用域链。</p>
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>闭包的定义其实很简单：函数 A 内部有一个函数 B，函数 B 可以访问到函数 A 中的变量，那么函数 B 就是闭包。</p>
-<p>在 JS 中，闭包存在的意义就是让我们可以间接访问函数内部的变量.</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/11897004.html">一篇文章看懂JS闭包，都要2020年了，你怎么能还不懂闭包？</a></p>
-<p>闭包是由函数以及创建该函数的词法环境组合而成，这个环境包含了这个闭包创建时所能访问的所有局部变量。</p>
-<p>闭包的应用场景</p>
-<h3 id="this"><a href="#this" class="headerlink" title="this"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/11962610.html">this</a></h3><p>this的类型可以大致分为5中类型，分别为默认绑定、隐式绑定、显式绑定、new绑定、箭头函数绑定</p>
-<p>默认绑定可以理解为函数调用时并无任何前缀，该类型的this指向window，</p>
-<p>隐式绑定可以理解为函数调用时，前面存在调用它的对象，那么this就会隐式绑定到这个对象上，如果有多个前缀，那么this指向距离调用自己最近的对象。</p>
-<p>显式绑定就是通过bind，call，apply改变this的行为，且通过bind改变的this，无法在改变。</p>
-<p>new绑定就是通过new构造函数创建了一个新对象，而在函数体内，this将指向这个新对象上（可以抽象理解为新对象就是this）。</p>
-<p>箭头函数中没有this，箭头函数的this指向取决于外层作用域中的this，外层作用域或函数的this指向谁，箭头函数中的this便指向谁。</p>
-<p>this的优先级为</p>
-<p>显式绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
-<p>new绑定 &gt; 隐式绑定 &gt; 默认绑定</p>
-<h3 id="call、apply与bind有什么区别？"><a href="#call、apply与bind有什么区别？" class="headerlink" title="call、apply与bind有什么区别？"></a><strong>call、apply与bind有什么区别？</strong></h3><p>1.call、apply与bind都用于改变this绑定，但call、apply在改变this指向的同时还会执行函数，而bind在改变this后是返回一个全新的boundFcuntion绑定函数，这也是为什么上方例子中bind后还加了一对括号 ()的原因。</p>
-<p>2.bind属于硬绑定，返回的 boundFunction 的 this 指向无法再次通过bind、apply或 call 修改；call与apply的绑定只适用当前调用，调用完就没了，下次要用还得再次绑。</p>
-<p>3.call与apply功能完全相同，唯一不同的是call方法传递函数调用形参是以散列形式，而apply方法的形参是一个数组。在传参的情况下，call的性能要高于apply，因为apply在执行时还要多一步解析数组。</p>
-<h3 id="能说说深浅拷贝的区别与实现吗？"><a href="#能说说深浅拷贝的区别与实现吗？" class="headerlink" title="能说说深浅拷贝的区别与实现吗？"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/7889848.html">能说说深浅拷贝的区别与实现吗？</a></h3><p>浅拷贝只是拷贝了对象或者数组的第一层，如果属性值也是引用类型，那么浅拷贝出来的新对象，其中的引用类型只是拷贝了引用指针，并没有完全拷贝，改变原对象其中的一个属性值，拷贝后对象也会变。深拷贝则没用这种问题，是完全拷贝。</p>
-<p>深拷贝的边界问题：假设我们要实现一个深拷贝函数<code>deepCopy</code>，因为前面说了深拷贝是针对引用数据来说的，第一点，传进来的参数一定是得检验数据数据类型，若是基础类型就没拷贝的必要了。第二点，对象的属性值也可能是一个对象，因此在复制时还得对值进行判断，若仍然是对象，我们得递归。第三点，我们拷贝对象自然是希望拷贝对象自身属性，而对于非自身的继承属性我们得过滤掉</p>
-<h3 id="常用八种继承方案"><a href="#常用八种继承方案" class="headerlink" title="常用八种继承方案"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903696111763470">常用八种继承方案</a></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inheritPrototype</span>(<span class="params">parent,child</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> prototype = <span class="built_in">Object</span>.create(parent.prototype)</span><br><span class="line">  prototype.constructor = child</span><br><span class="line">  child.prototype = prototype</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.age = age</span><br><span class="line">  Parent.call(<span class="built_in">this</span>,name)</span><br><span class="line">&#125;</span><br><span class="line">inheritPrototype(Parent,Child)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> child = <span class="keyword">new</span> Child(<span class="string">&#x27;张三&#x27;</span>,<span class="number">18</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(child.name,child.age)<span class="comment">//张三 18</span></span><br><span class="line">child.sayName() <span class="comment">// 张三</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="JS-20道概念虽老但也略有收获的JS基础题，快速做题，高效复习，不妨试试？"><a href="#JS-20道概念虽老但也略有收获的JS基础题，快速做题，高效复习，不妨试试？" class="headerlink" title="JS 20道概念虽老但也略有收获的JS基础题，快速做题，高效复习，不妨试试？"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/13363457.html">JS 20道概念虽老但也略有收获的JS基础题，快速做题，高效复习，不妨试试？</a></h3><h3 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h3><p>防抖与节流函数是一种最常用的 <strong>高频触发优化方式</strong>，能对性能有较大的帮助。</p>
-<ul>
-<li><strong>防抖 (debounce)</strong>: 将多次高频操作优化为只在最后一次执行，通常使用的场景是：用户输入，只需再输入完成后做一次输入校验即可。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function debounce (fn,wait,immediate)&#123;</span><br><span class="line">  let timer &#x3D; null</span><br><span class="line">  return function()&#123;</span><br><span class="line">    let arg &#x3D; arguments</span><br><span class="line">    let _this &#x3D; this</span><br><span class="line">    if(immediate)&#123;</span><br><span class="line">      immediate &#x3D; false</span><br><span class="line">      return fn.apply(_this,arg)</span><br><span class="line">    &#125;</span><br><span class="line">    if(time) clearTimeout(timer)</span><br><span class="line">    timer &#x3D; setTimeout(()&#x3D;&gt;&#123;</span><br><span class="line">      return fn.apply(_this,arg)</span><br><span class="line">    &#125;,wait)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>节流(throttle)</strong>: 每隔一段时间后执行一次，也就是降低频率，将高频操作优化成低频操作，通常使用场景: 滚动条事件 或者 resize 事件，通常每隔 100~500 ms执行一次即可。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function throttle(fn,wait,immediate)&#123;</span><br><span class="line">  let timer &#x3D; null</span><br><span class="line">  return function()&#123;</span><br><span class="line">    let arg &#x3D; arguments</span><br><span class="line">    let _this &#x3D; this</span><br><span class="line">    if(immediate)&#123;</span><br><span class="line">      immediate &#x3D; false</span><br><span class="line">      return fn.apply(_this,arg)</span><br><span class="line">    &#125;</span><br><span class="line">    if(!time)&#123;</span><br><span class="line">      setTimeout(()&#x3D;&gt;&#123;</span><br><span class="line">        timer &#x3D; null</span><br><span class="line">        return fn.apply(_this,arg)</span><br><span class="line">      &#125;,wait)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="手写-call、apply-及-bind-函数"><a href="#手写-call、apply-及-bind-函数" class="headerlink" title="手写 call、apply 及 bind 函数"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/renzhiwei2017/p/10364760.html">手写 call、apply 及 bind 函数</a></h3><h3 id="手写new"><a href="#手写new" class="headerlink" title="手写new"></a>手写new</h3><p>在调用 <code>new</code> 的过程中会发生以上四件事情：</p>
-<ol>
-<li>新生成了一个对象</li>
-<li>链接到原型</li>
-<li>绑定 this</li>
-<li>如果函数没有返回对象类型<code>Object</code>(包含<code>Functoin, Array, Date, RegExg, Error</code>)，那么<code>new</code>表达式中的函数调用将返回该对象引用。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">New</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">  obj.__proto__ = fn.prototype</span><br><span class="line">  <span class="keyword">const</span> result = fn.apply(obj,[...arguments].slice(<span class="number">1</span>))</span><br><span class="line">  <span class="keyword">return</span> result <span class="keyword">instanceof</span> <span class="built_in">Object</span> ? result:obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="instanceof-的原理"><a href="#instanceof-的原理" class="headerlink" title="instanceof 的原理"></a>instanceof 的原理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">涉及面试题：instanceof 的原理是什么？</span><br></pre></td></tr></table></figure>
-
-<p><code>instanceof</code> 可以正确的判断对象的类型，因为内部机制是通过判断对象的原型链中是不是能找到类型的 <code>prototype</code>。</p>
-<p>我们也可以试着实现一下 <code>instanceof</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myInstanceof</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> prototype = right.prototype</span><br><span class="line">  left = left.__proto__</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (left === <span class="literal">null</span> || left === <span class="literal">undefined</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">if</span> (prototype === left)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    left = left.__proto__</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以下是对实现的分析：</p>
-<ul>
-<li>首先获取类型的原型</li>
-<li>然后获得对象的原型</li>
-<li>然后一直循环判断对象的原型是否等于类型的原型，直到对象原型为 <code>null</code>，因为原型链最终为 <code>null</code></li>
-</ul>
-<h3 id="为什么-0-1-0-2-0-3"><a href="#为什么-0-1-0-2-0-3" class="headerlink" title="为什么 0.1 + 0.2 != 0.3"></a>为什么 0.1 + 0.2 != <strong>0.3</strong></h3><h3 id="localStorage和sessionStorage"><a href="#localStorage和sessionStorage" class="headerlink" title="localStorage和sessionStorage"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pengc/p/8714475.html">localStorage和sessionStorage</a></h3><p>首先这两兄弟都是存在浏览器中,local只要不删掉就会一直存在,session关掉当前窗口或者标签页就会清空.并且这两兄弟不同浏览器都是不共享的,local同源下的网页都是共享的,session则是不同页面或者标签页就不会共享 , 如果有iframe且他们是同源,那也是共享的…</p>
-<h3 id="常用的数组API"><a href="#常用的数组API" class="headerlink" title="常用的数组API"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">常用的数组API</a></h3><p>push:改变原数组,返回新数组长度</p>
-<p>pop:改变原数组,返回删除的元素</p>
-<p>unshift:改变原数组,返回新数组长度</p>
-<p>shift:改变原数组,返回删除的元素</p>
-<p>slice:不改变原数组,返回新数组</p>
-<p>splice:改变原数组,返回被修改的内容</p>
-<h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">sort</a></h3><p>小于0=&gt;false,不换位置 , 大于0=&gt;true,换位置</p>
-<p>如果[2,3] , 如果是a-b  =&gt;2-3&lt;0 不换位置,那不就是升序了, 如果是b-a =&gt;3-2&gt;0 那就换位置[3,2]不就是降序了.</p>
-<p>结合实际,很好理解</p>
-<h3 id="对象API"><a href="#对象API" class="headerlink" title="对象API"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/entries">对象API</a></h3><p>assign:合并对象,浅拷贝</p>
-<p>create:方法创建一个新对象，使用现有的对象来提供新创建的对象的<code>__proto__</code>。</p>
-<p>defineProperty： 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。</p>
-<p><strong>keys</strong>：方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和正常循环遍历该对象时返回的顺序一致 。</p>
-<p>values：方法返回一个给定对象自身的所有可枚举属性值的数组，值的顺序与使用<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in"><code>for...in</code></a>循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。</p>
-<p>**Object.entries()**：方法返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...in"><code>for...in</code></a> 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还会枚举原型链中的属性）。</p>
-<p><code>isPrototypeOf()</code> ：方法用于测试一个对象是否存在于另一个对象的原型链上。</p>
-<p><code>hasOwnProperty()</code> 方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性（也就是，是否有指定的键）。</p>
-<h3 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">Fetch</a></h3><p>请注意，<code>fetch</code> 规范与 <code>jQuery.ajax()</code> 主要有三种方式的不同：</p>
-<ul>
-<li>当接收到一个代表错误的 HTTP 状态码时，从 <code>fetch()</code> 返回的 Promise <strong>不会被标记为 reject，</strong> 即使响应的 HTTP 状态码是 404 或 500。相反，它会将 Promise 状态标记为 resolve （但是会将 resolve 的返回值的 <code>ok</code> 属性设置为 false ），仅当网络故障时或请求被阻止时，才会标记为 reject。</li>
-<li><code>fetch()</code> <strong>可以不会接受跨域 cookies；</strong>你也可以不能使用 <code>fetch()</code> 建立起跨域会话。其他网站的 <code>Set-Cookie</code> 头部字段将会被无视。</li>
-<li><code>fetch</code> <strong>不会发送 cookies</strong>。除非你使用了<em>credentials</em> 的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters">初始化选项</a>。（自 2017 年 8 月 25 日以后，默认的 credentials 政策变更为 <code>same-origin</code>。Firefox 也在 61.0b13 版本中进行了修改）</li>
-</ul>
-<p>fetch方法可以接收两个参数，一个是指定获取资源的资源路径，第二个是初始化配置option，该方法会返回一个Promise，除了网络故障，否则Promise状态不会为reject。</p>
-<h3 id="介绍下原型和原型链？"><a href="#介绍下原型和原型链？" class="headerlink" title="介绍下原型和原型链？"></a>介绍下原型和原型链？</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/12321869.html">https://www.cnblogs.com/echolun/p/12321869.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/12384935.html">https://www.cnblogs.com/echolun/p/12384935.html</a></p>
-<p>首先我们要知道javascript中的万物皆对象，那么万物也就包括那些基础数据类型：string，number，Boolean等，当然除了null和undefined外，虽然是typeof null 为object ，但是这只是JS的一个小BUG，实际上null并未为对象，这些对象在JS中称之为包装对象,除了包装对象以外就是普通对象了。当然这些对象都是构造函数来创建的，构造函数虽然叫做构造函数但是与普通函数没什么区别，通过构造函数new出来的叫做实例，这个实例的<code>__proto__</code>就指向他的构造函数的prototype，所以说每一个函数都会有一个prototype，这个prototype就叫做原型，那么原型其实也是一个对象，那么说直接点，原型对象就是一个包含很多属性和方法的对象，既然原型是对象，那么原型的<code>__proto__</code>也就是指向object.prototype。当然这些普通的构造函数都是来源于Function这个构造函数，Function这个构造函数很特殊，既然Function是一个函数，所以他就是自己创建自己,所以他的<code>__proto__</code>和prototype都是指向Function.prototype,所以Function.prototype的constructor就指向Function本身，但是当我<code>console.log(typeof Function.prototype)</code>时他居然输出的是function,但是Function.prototype的<code>__proto__</code>又是指向<code>Object.prototype</code>这就令人费解了,在我查阅相关文档的时候,文档明确指出,这奇葩的操作是为了兼容旧版的ECMAscript.</p>
-<p>当一个对象访问某个属性时，它会先查找自己有没有，如果没有就顺着<code>__proto__</code>往上查找创建自己构造函数的原型有没有，这个查找的过程就.是原型链，原型链的顶端是null。</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/11/16/1671d387e4189ec8?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
-<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a><a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/27">数组去重</a></h3><p>ES6</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span> (<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(arr))</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">1</span>,<span class="string">&#x27;true&#x27;</span>,<span class="string">&#x27;true&#x27;</span>,<span class="literal">true</span>,<span class="literal">true</span>,<span class="number">15</span>,<span class="number">15</span>,<span class="literal">false</span>,<span class="literal">false</span>, <span class="literal">undefined</span>,<span class="literal">undefined</span>, <span class="literal">null</span>,<span class="literal">null</span>, <span class="literal">NaN</span>, <span class="literal">NaN</span>,<span class="string">&#x27;NaN&#x27;</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>,&#123;&#125;,&#123;&#125;];</span><br><span class="line"><span class="built_in">console</span>.log(unique(arr))</span><br><span class="line"> <span class="comment">//[1, &quot;true&quot;, true, 15, false, undefined, null, NaN, &quot;NaN&quot;, 0, &quot;a&quot;, &#123;&#125;, &#123;&#125;]</span></span><br></pre></td></tr></table></figure>
-
-<p>ES5</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = []</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>,arrLength = arr.length;i&lt;arrLength;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>,resLength = res.length;j&lt;resLength;j++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(arr[i]===res[j])&#123;</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(resLength === j)&#123;</span><br><span class="line">      result.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = []</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>,arrLength = arr.length;i&lt;arrLength;i++)&#123;</span><br><span class="line">    <span class="keyword">let</span> current = arr[i]</span><br><span class="line">    <span class="keyword">if</span>(result.indexOf(current) === -<span class="number">1</span>)&#123;</span><br><span class="line">      result.push(current)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = []</span><br><span class="line">  <span class="keyword">let</span> seen</span><br><span class="line">  <span class="keyword">let</span> sortArray = arr.concat().sort()</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>,len= sortArray.length;i&lt;len;i++)&#123;</span><br><span class="line">    <span class="keyword">let</span> value = sortArray[i]</span><br><span class="line">    <span class="keyword">if</span>(!i || value !== seen)&#123;</span><br><span class="line">      result.push(value)</span><br><span class="line">    &#125;</span><br><span class="line">    seen = value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//es5</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique4</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arr.filter(<span class="function">(<span class="params">item,index,arr</span>)=&gt;</span>arr.indexOf(item) === index)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique5</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arr.concat().sort().filter(<span class="function">(<span class="params">item,index,array</span>)=&gt;</span>!index || item !== array[index - <span class="number">1</span>])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">&#x27;1&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> array.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obj.hasOwnProperty(<span class="keyword">typeof</span> item + item) ? <span class="literal">false</span> : (obj[<span class="keyword">typeof</span> item + item] = <span class="literal">true</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(unique(array)); <span class="comment">// [1, 2, &quot;1&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="string">&#x27;1&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unique</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> array.reduce(<span class="function">(<span class="params">item,next</span>)=&gt;</span>&#123;</span><br><span class="line">        obj[<span class="keyword">typeof</span> next + next] ? <span class="string">&#x27;&#x27;</span> : obj[<span class="keyword">typeof</span> next +next] = <span class="literal">true</span> &amp;&amp;  item.push(next)</span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line">    &#125;,[])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(unique(array)); <span class="comment">// [1, 2, &quot;1&quot;]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 利用reduce方法遍历数组,reduce第一个参数是遍历需要执行的函数，第二个参数是item的初始值</span><br><span class="line">33       var obj &#x3D; &#123;&#125;;</span><br><span class="line">34     arr &#x3D; arr.reduce(function(item, next) &#123;</span><br><span class="line">35       obj[next.key] ? &#39;&#39; : obj[next.key] &#x3D; true &amp;&amp; item.push(next);</span><br><span class="line">36       return item;</span><br><span class="line">37    &#125;, []);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="数组排序"><a href="#数组排序" class="headerlink" title="数组排序"></a>数组排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function mpSort(arr)&#123;</span><br><span class="line">  for(let i&#x3D; 0;i&lt;arr.length - 1 ;i++)&#123;</span><br><span class="line">    for(let j&#x3D; 0;j&lt;arr.length - 1 - i;j++ )&#123;</span><br><span class="line">      if(arr[j]&gt;arr[j+1])&#123;</span><br><span class="line">        let tem &#x3D; arr[j+1]</span><br><span class="line">        arr[j] &#x3D; tem</span><br><span class="line">        arr[j+1] &#x3D; arr[j]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return arr</span><br><span class="line">&#125;</span><br><span class="line">console.log(mpSort([2,3,6,1,2,5,6,7,8]));</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="map和forEach的区别？"><a href="#map和forEach的区别？" class="headerlink" title="map和forEach的区别？"></a>map和forEach的区别？</h3><p>相同点：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">都是循环遍历数组中的每一项，forEach和map方法里每次执行匿名函数都支持3个参数，参数分别是</span><br><span class="line">item（当前每一项）、index（索引值）、arr（原数组），需要用哪个的时候就写哪个，匿名函数</span><br><span class="line">中的this都是指向window，只能遍历数组。</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>不同：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">map方法返回一个新的数组，数组中的元素为原始数组调用函数处理后的值。(原数组进行处理之后</span><br><span class="line">对应的一个新的数组),map()方法不会改变原始数组map()方法不会对空数组进行检测forEach()</span><br><span class="line">方法用于调用数组的每个元素，将元素传给回调函数.(没有return，返回值是undefined，forEach</span><br><span class="line">对于空数组是不会调用回调函数的。)</span><br></pre></td></tr></table></figure>
-
-<p>1.for循环可以使用break跳出循环，但forEach不能。</p>
-<p>2.for循环可以控制循环起点（i初始化的数字决定循环的起点），forEach只能默认从索引0开始。</p>
-<p>3.for循环过程中支持修改索引（修改 i），但forEach做不到（底层控制index自增，我们无法左右它）。</p>
-<h3 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h3><p>EL就是我们经常说的JS事件循环机制, 因为JS是单线程的,所以JS在执行代码的时候会遵循一种机制 , 在EventLoop中有一种概念叫做任务 , 任务大致可以分为同步任务和异步任务,同步任务顾名思义就是立即执行的任务,同步代码会直接进入到主线程中执行 , 异步任务反之, 异步任务通常包括<code>settimeout</code>，<code>setInterval</code>，<code>setimmeiate</code>，<code>Promise</code>，<code>mutationObeserve</code>等，异步任务也细分为宏任务和微任务。</p>
-<p>同步任务在JS代码执行的同时，进入到执行栈中进入执行。宏任务和微任务则会由浏览器统一管理异步任务的回调函数，进入不同的队列，其中宏任务会进入到宏任务队列，微任务会进入到微任务队列，队列遵守先进先出原则，当同步任务执行完毕后，就会检查微任务队列是否存在任务，如果有就将微任务队列依次执行，直至清空，至此第一次事件循环结束，然后浏览器就会进行UI渲染，这种重复的过程就是所谓的EventLoop。</p>
-<h3 id="什么是Symbol-他是使用场景是什么"><a href="#什么是Symbol-他是使用场景是什么" class="headerlink" title="什么是Symbol,他是使用场景是什么"></a>什么是Symbol,他是使用场景是什么</h3><p>引用场景：<a target="_blank" rel="noopener" href="https://www.nblogs.com/archives/489/">https://www.nblogs.com/archives/489/</a></p>
-<h3 id="事件委托的应用场景"><a href="#事件委托的应用场景" class="headerlink" title="事件委托的应用场景"></a>事件委托的应用场景</h3><p>列表</p>
-<h3 id="JS面试题-2"><a href="#JS面试题-2" class="headerlink" title="JS面试题"></a>JS面试题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; 1,b &#x3D;2;</span><br><span class="line">console.log(a+++b)</span><br><span class="line"></span><br><span class="line">var result &#x3D; (function()&#123;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;,function()&#123;</span><br><span class="line">    return &quot;2&quot;</span><br><span class="line">&#125;)()</span><br><span class="line">console.log(typeof result)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var a&#x3D;&#123;</span><br><span class="line">    num:1,</span><br><span class="line">    toString:function()&#123;</span><br><span class="line">       return a.num++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> if(a&#x3D;&#x3D;1&amp;&amp;a&#x3D;&#x3D;2&amp;&amp;a&#x3D;&#x3D;3)&#123;</span><br><span class="line">     console.log(&quot;恭喜答对啦！&quot;);</span><br><span class="line"> &#125;else&#123;</span><br><span class="line">     console.log(&quot;还是错了小子！&quot;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-css"><a href="#2-css" class="headerlink" title="2.css"></a>2.css</h2><h3 id="nth-of-child和nth-of-type的区别"><a href="#nth-of-child和nth-of-type的区别" class="headerlink" title="nth-of-child和nth-of-type的区别"></a>nth-of-child和nth-of-type的区别</h3><p>nth-child是在父元素下所有的子元素中筛选指定的选择器,而nth-of-type是在父元素下指定的选择器中筛选</p>
-<h3 id="css选择器-和"><a href="#css选择器-和" class="headerlink" title="css选择器+和 ~"></a>css选择器+和 ~</h3><p><strong>相邻兄弟选择器</strong> (<code>+</code>) 介于两个选择器之间，当第二个元素<em>紧跟在</em>第一个元素之后，并且两个元素都是属于同一个父<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/%E5%85%83%E7%B4%A0"><code>元素</code></a>的子元素，则第二个元素将被选中。</p>
-<p><strong>兄弟选择符</strong>(<code>~</code>)，位置无须紧邻，只须同层级，<code>A~B</code> 选择<code>A</code>元素之后所有同层级<code>B</code>元素。</p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/402f73653f39">css3选择器</a></p>
-<h3 id="CSS-常考面试题资料"><a href="#CSS-常考面试题资料" class="headerlink" title="CSS 常考面试题资料"></a><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763801317390">CSS 常考面试题资料</a></h3><h3 id="position的属性值有哪些-它们的区别是什么"><a href="#position的属性值有哪些-它们的区别是什么" class="headerlink" title="position的属性值有哪些,它们的区别是什么"></a>position的属性值有哪些,它们的区别是什么</h3><h3 id="列举一下移动端适配方案"><a href="#列举一下移动端适配方案" class="headerlink" title="列举一下移动端适配方案"></a>列举一下移动端适配方案</h3><h3 id="less和CSS的区别-less的函数了解过什么"><a href="#less和CSS的区别-less的函数了解过什么" class="headerlink" title="less和CSS的区别,less的函数了解过什么"></a>less和CSS的区别,less的函数了解过什么</h3><h3 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_36422236/article/details/88763187">BFC</a></h3><h3 id="居中布局"><a href="#居中布局" class="headerlink" title="居中布局"></a>居中布局</h3><ul>
-<li>水平居中<ul>
-<li>行内元素: <code>text-align: center</code></li>
-<li>块级元素: <code>margin: 0 auto</code></li>
-<li><code>absolute + transform</code></li>
-<li><code>flex + justify-content: center</code></li>
-</ul>
-</li>
-<li>垂直居中<ul>
-<li><code>line-height: height</code></li>
-<li><code>absolute + transform</code></li>
-<li><code>flex + align-items: center</code></li>
-<li><code>table</code></li>
-</ul>
-</li>
-<li>水平垂直居中<ul>
-<li><code>absolute + transform</code></li>
-<li><code>flex + justify-content + align-items</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="去除浮动影响，防止父级高度塌陷"><a href="#去除浮动影响，防止父级高度塌陷" class="headerlink" title="去除浮动影响，防止父级高度塌陷"></a>去除浮动影响，防止父级高度塌陷</h3><ul>
-<li>通过增加尾元素清除浮动<ul>
-<li><code>:after / &lt;br&gt; : clear: both</code></li>
-</ul>
-</li>
-<li>创建父级 BFC</li>
-<li>父级设置高度</li>
-</ul>
-<h3 id="一篇文章弄懂flex布局"><a href="#一篇文章弄懂flex布局" class="headerlink" title="一篇文章弄懂flex布局"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/11299460.html">一篇文章弄懂flex布局</a></h3><h3 id="请简述下CSS选择器的权重与优先规则。"><a href="#请简述下CSS选择器的权重与优先规则。" class="headerlink" title="请简述下CSS选择器的权重与优先规则。"></a>请简述下CSS选择器的权重与优先规则。</h3><p>这个没啥好说的，!important &gt; 行内样式 &gt; ID选择器 &gt; 类选择器 &gt; 元素选择器 &gt; 通配符选择器 &gt; 继承 &gt; 浏览器默认属性。</p>
-<h3 id="用css实现一个三角形"><a href="#用css实现一个三角形" class="headerlink" title="用css实现一个三角形"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/11888612.html">用css实现一个三角形</a></h3><h3 id="BEM"><a href="#BEM" class="headerlink" title="BEM"></a>BEM</h3><h2 id="3-浏览器与HTTP相关知识"><a href="#3-浏览器与HTTP相关知识" class="headerlink" title="3.浏览器与HTTP相关知识"></a>3.浏览器与HTTP相关知识</h2><p>垃圾回收</p>
-<h3 id="网络方面还可以吧（我默默的点点头），说说TCP的长连接和短连接的区别？"><a href="#网络方面还可以吧（我默默的点点头），说说TCP的长连接和短连接的区别？" class="headerlink" title="网络方面还可以吧（我默默的点点头），说说TCP的长连接和短连接的区别？"></a>网络方面还可以吧（我默默的点点头），说说TCP的长连接和短连接的区别？</h3><p>如果了解得比较深入，可以说说各自的优缺点。</p>
-<p>一、短连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">概念:客户端与服务器建立连接开始通信，一次&#x2F;指定次数通信结束之后就断开本次TCP连接，</span><br><span class="line">     当下次再次通信时，再次建立TCP的链接。</span><br><span class="line"></span><br><span class="line">优点：不长期占用服务器的内存，那么服务器能处理的连接数量是比较多的</span><br><span class="line"></span><br><span class="line">缺点：1、因为要等到发送或者获取资源时，才去请求建立连接，而且http协议只能客户端主动向服务端发送数据后，服务端才返回</span><br><span class="line">   	对应的数据，那么服务端想主动发送数据给客户端呢？Websocket可以让服务端主动发送数据给客户端，或者要等到下一次要请求数据时，才发送，比如我们采用</span><br><span class="line">   	轮询（30秒或者更长）拉取消息， 那么服务器与客户端通信的实时性就丧失了。</span><br><span class="line"></span><br><span class="line">      2、客户端采用轮询来实时获取信息，或者说大量的客户端使用短连接的方式通信，那么就浪费了大量的CPU和带宽资源用于建立连接</span><br><span class="line">   	和释放连接，存在资源浪费，甚至是无法建立连接。比如经典的http长轮询（微信网页客户端端）</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ac4448d4a7e44ee9b027cf3b3ee7913~tplv-k3u1fbpfcp-watermark.image" alt="img"></p>
-<p>二、长连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">概念:	TCP与服务器建立连接之后一直处于连接状态，直到最后不再需要服务的时候才断开连接</span><br><span class="line"></span><br><span class="line">优点：	1、传输数据快</span><br><span class="line">	2、服务器能够主动第一时间传输数据到客户端</span><br><span class="line"></span><br><span class="line">缺点:	1、因为客户端与服务器一直保持这种连接，那么在高并发分布式集群系统中客户端数量会越来越多，占 用很多的系统资源</span><br><span class="line">	2、TCP本身是一种有状态的数据，在高并发分布式系统会导致后台设计比较难做</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cdea2d14cef54e0c8490ed411c85340e~tplv-k3u1fbpfcp-watermark.image" alt="img"></p>
-<h3 id="WebSocket，说说他的特点？"><a href="#WebSocket，说说他的特点？" class="headerlink" title="WebSocket，说说他的特点？"></a>WebSocket，说说他的特点？</h3><p>完了这是跟我杠上了，我依稀记得一些…，可以看出对基础考察得比较厉害</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1、最大的特点就是服务端可以主动向客户端发送数据</span><br><span class="line"></span><br><span class="line">2、与 HTTP 协议有着良好的兼容性。默认端口是80和443，并握手阶段采用HTTP协议，因此握手时不容易屏蔽，能通过各种HTTP代理服务器。</span><br><span class="line"></span><br><span class="line">3、数据格式比较轻量，性能开销小，通信高效。</span><br><span class="line"></span><br><span class="line">4、可以发送文本，也可以发送二进制数据。</span><br><span class="line"></span><br><span class="line">5、没有同源限制，客户端可以与任意服务器通信。</span><br><span class="line"></span><br><span class="line">6、协议标识符是ws（如果加密，则为wss，加密层是TLS），服务器网址就是 URL。</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h3 id="说说三次握手四次挥手呗？"><a href="#说说三次握手四次挥手呗？" class="headerlink" title="说说三次握手四次挥手呗？"></a>说说三次握手四次挥手呗？</h3><h3 id="握手：（模拟甲请乙吃饭，我是这么理解的）"><a href="#握手：（模拟甲请乙吃饭，我是这么理解的）" class="headerlink" title="握手：（模拟甲请乙吃饭，我是这么理解的）"></a>握手：（模拟甲请乙吃饭，我是这么理解的）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、客户端发送一个SYN码给服务器，要求建立数据连接；（甲：来我家吃饭，给你一张SYN门卡）</span><br><span class="line">2、服务器拿到SYN和自己处理一个SYN（标志）；叫SYN+ACK（确认包）；发送给客户端，可以建立连接；（乙：我收到你的门卡了，我也给你一张叫ASK的卡）</span><br><span class="line">3、客户端再次发送ACK向服务器，服务器验证ACK没有问题，则建立起连接；（甲：来了啊进来吧！乙：出示你的ASK卡，我看看走错没，甲：这不是吗？快进来吧）</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<h3 id="挥手："><a href="#挥手：" class="headerlink" title="挥手："></a>挥手：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、客户端发送FIN(结束)报文，通知服务器数据已经传输完毕；（甲：小声嘀咕..这货吃完了吧？该走了吧）</span><br><span class="line">2、务器接收到之后，通知客户端我收到了FIN,发送ACK(确认)给客户端，数据还没有传输完成（乙：我听到你说的话了，你确定赶我走吗？但是我还没吃完哎！）</span><br><span class="line">3、服务器已经传输完毕，再次发送FIN通知客户端，数据已经传输完毕（乙：我吃完了，别解释了，果然不爱了，我走了）</span><br><span class="line">4、客户端再次发送ACK,进入TIME_WAIT状态；服务器和客户端关闭连接；（甲：把你的ACK还给你，把我家米都吃空了）</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="为什么建立连接是三次握手，而断开连接是四次挥手呢"><a href="#为什么建立连接是三次握手，而断开连接是四次挥手呢" class="headerlink" title="为什么建立连接是三次握手，而断开连接是四次挥手呢?"></a>为什么建立连接是三次握手，而断开连接是四次挥手呢?</h3><p>建立连接的时候， 服务器在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个 报文里发送给客户端。而关闭连接时，服务器收到对方的FIN报文时，仅仅表示对方不再发送数据了 但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一 些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分 开发送，从而导致多了一次。</p>
-<h3 id="输入-URL-到页面渲染的整个流程"><a href="#输入-URL-到页面渲染的整个流程" class="headerlink" title="输入 URL 到页面渲染的整个流程"></a><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763792945165">输入 URL 到页面渲染的整个流程</a></h3><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000013662126">https://segmentfault.com/a/1190000013662126</a></p>
-<ul>
-<li>DNS 解析:将域名解析成 IP 地址</li>
-<li>TCP 连接：TCP 三次握手</li>
-<li>发送 HTTP 请求</li>
-<li>服务器处理请求并返回 HTTP 报文</li>
-<li>浏览器解析渲染页面</li>
-<li>断开连接：TCP 四次挥手</li>
-</ul>
-<h3 id="HTTP1-0、HTTP1-1-和-HTTP2-0-的区别"><a href="#HTTP1-0、HTTP1-1-和-HTTP2-0-的区别" class="headerlink" title="HTTP1.0、HTTP1.1 和 HTTP2.0 的区别"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/heluan/p/8620312.html">HTTP1.0、HTTP1.1 和 HTTP2.0 的区别</a></h3><h3 id="http缓存详解，http缓存推荐方案"><a href="#http缓存详解，http缓存推荐方案" class="headerlink" title="http缓存详解，http缓存推荐方案"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/echolun/p/9419517.html">http缓存详解，http缓存推荐方案</a></h3><h3 id="看完这篇HTTP，跟面试官扯皮就没问题了"><a href="#看完这篇HTTP，跟面试官扯皮就没问题了" class="headerlink" title="看完这篇HTTP，跟面试官扯皮就没问题了"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904045572800525#heading-48">看完这篇HTTP，跟面试官扯皮就没问题了</a></h3><p>http请求头包含哪些东西？</p>
-<p>HTTP Code</p>
-<h3 id="能说下ajax吗？"><a href="#能说下ajax吗？" class="headerlink" title="能说下ajax吗？"></a><a target="_blank" rel="noopener" href="https://www.runoob.com/ajax/ajax-intro.html">能说下ajax吗？</a></h3><table>
-<thead>
-<tr>
-<th align="left">属性</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">onreadystatechange</td>
-<td align="left">存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。</td>
-</tr>
-<tr>
-<td align="left">readyState</td>
-<td align="left">存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。0: 请求未初始化1: 服务器连接已建立2: 请求已接收3: 请求处理中4: 请求已完成，且响应已就绪</td>
-</tr>
-<tr>
-<td align="left">status</td>
-<td align="left">200: “OK” 404: 未找到页面</td>
-</tr>
-</tbody></table>
-<h3 id="九种跨域方式实现原理（完整版）"><a href="#九种跨域方式实现原理（完整版）" class="headerlink" title="九种跨域方式实现原理（完整版）"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903767226351623#heading-14">九种跨域方式实现原理（完整版）</a></h3><h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763792928776">设计模式</a></h3><h3 id="常用数据结构"><a href="#常用数据结构" class="headerlink" title="常用数据结构"></a><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763797123080">常用数据结构</a></h3><h2 id="4-vue"><a href="#4-vue" class="headerlink" title="4.vue"></a>4.vue</h2><h3 id="Vue路由守卫有哪些，怎么设置，使用场景等"><a href="#Vue路由守卫有哪些，怎么设置，使用场景等" class="headerlink" title="Vue路由守卫有哪些，怎么设置，使用场景等"></a>Vue路由守卫有哪些，怎么设置，使用场景等</h3><p>常用的两个路由守卫：router.beforeEach 和 router.afterEach 每个守卫方法接收三个参数： to: Route: 即将要进入的目标 路由对象 from: Route: 当前导航正要离开的路由 next: Function: 一定要调用该方法来 resolve 这个钩子。 在项目中，一般在beforeEach这个钩子函数中进行路由跳转的一些信息判断。 判断是否登录，是否拿到对应的路由权限等等。</p>
-<h3 id="响应式原理"><a href="#响应式原理" class="headerlink" title="响应式原理"></a>响应式原理</h3><p>Vue是采用数据劫持配合发布者-订阅者模式，通过Object.defineProperty来()来劫持各个属性的getter和setter 在数据发生变化的时候，发布消息给依赖收集器，去通知观察者，做出对应的回调函数去更新视图。 具体就是： MVVM作为绑定的入口，整合Observe,Compil和Watcher三者，通过Observe来监听model的变化 通过Compil来解析编译模版指令，最终利用Watcher搭起Observe和Compil之前的通信桥梁 从而达到数据变化 =&gt; 更新视图，视图交互变化(input) =&gt; 数据model变更的双向绑定效果。</p>
-<p>vue2响应式原理的核心就是用object.definePrototype遍历每个属性,设置get和set,在get时进行依赖收集 , set时进行派发更新 .</p>
-<h3 id="Vue中的computed和watch的区别？"><a href="#Vue中的computed和watch的区别？" class="headerlink" title="Vue中的computed和watch的区别？"></a>Vue中的computed和watch的区别？</h3><p>1、computed：是一个有缓存的watcher，依赖的属性发生变化就会更新视图。 适用于计算比较消耗性能的计算场景。当表达式过于 复杂时，在模板中放入过多逻辑会让模板难以维护，可以将复杂的逻辑放入计算属性中处理 2、watch：没有缓存性，更多的是起到一个观察的作用。可以监听某些数据执行回调，当需要深度监听时，将deep:true开启即可。</p>
-<h3 id="双向绑定原理"><a href="#双向绑定原理" class="headerlink" title="双向绑定原理"></a>双向绑定原理</h3><p>通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终 利用Watcher搭起Observer和Compile之间的通信桥梁，达到数据变化-&gt;视图更新。在 初始化vue实例时，遍历data这个对象，给每一个键值对利用Object.definedProperty 对data的键值对新增get和set方法，利用了事件监听DOM的机制，让视图去改变数据。</p>
-<h3 id="用过keep-alive吗，说说对它的理解？"><a href="#用过keep-alive吗，说说对它的理解？" class="headerlink" title="用过keep-alive吗，说说对它的理解？"></a>用过keep-alive吗，说说对它的理解？</h3><p>keep-alive 是 Vue 内置的一个组件，可以使被包含的组件保留状态，避免重新渲染 ，有以下特性：</p>
-<p>1、一般结合路由和动态组件一起使用，用于缓存组件。</p>
-<p>2、提供 include 和 exclude 属性，两者都支持字符串或正则表达式， include 表示只有名称匹 配的组件会被缓存，exclude 表示任何名称匹配的组件都不会被缓存 ，其中 exclude 的优先级比 include 高。</p>
-<p>3、对应两个钩子函数 activated 和 deactivated ，当组件被激活时，触发钩子函数 activated， 当组件被移除时，触发钩子函数 deactivated。</p>
-<h3 id="组件中为什么data是一个函数"><a href="#组件中为什么data是一个函数" class="headerlink" title="组件中为什么data是一个函数"></a>组件中为什么data是一个函数</h3><p>data() {  return {      message: “123”,   } }  原因：因为组件是需要被复用的，所以必须是一个函数，如果是一个对象，作用域没有分开，子组件 的data属性值会相互影响。是一个函数的话那么每个实例可以维护一份被返回对象的独立的拷贝，组 件之间的 data 属性值不会互相影响。</p>
-<h3 id="那为什么new-Vue里data可以是一个对象？"><a href="#那为什么new-Vue里data可以是一个对象？" class="headerlink" title="那为什么new Vue里data可以是一个对象？"></a>那为什么new Vue里data可以是一个对象？</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;,</span><br><span class="line">  components: &#123;App&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">原因：因为JS里的对象是引用关系，而且new Vue是不会被复用的，所以不存在引用对象的问题。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Virtual-DOM了解吗？"><a href="#Virtual-DOM了解吗？" class="headerlink" title="Virtual DOM了解吗？"></a>Virtual DOM了解吗？</h3><h3 id="Vue-常考基础知识点"><a href="#Vue-常考基础知识点" class="headerlink" title="Vue 常考基础知识点"></a>Vue 常考基础知识点</h3><p><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763780345869">https://juejin.cn/book/6844733763675488269/section/6844733763780345869</a></p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763784556552">https://juejin.cn/book/6844733763675488269/section/6844733763784556552</a></p>
-<h2 id="5-react"><a href="#5-react" class="headerlink" title="5.react"></a>5.react</h2><h2 id="6-性能优化"><a href="#6-性能优化" class="headerlink" title="6.性能优化"></a>6.性能优化</h2><h3 id="假设现在有1000条数据的长列表，说下不用分页你怎么优化加载？"><a href="#假设现在有1000条数据的长列表，说下不用分页你怎么优化加载？" class="headerlink" title="假设现在有1000条数据的长列表，说下不用分页你怎么优化加载？"></a>假设现在有1000条数据的长列表，说下不用分页你怎么优化加载？</h3><h3 id="重绘（Repaint）和回流（Reflow）"><a href="#重绘（Repaint）和回流（Reflow）" class="headerlink" title="重绘（Repaint）和回流（Reflow）"></a>重绘（Repaint）和回流（Reflow）</h3><p>重绘和回流会在我们设置节点样式时频繁出现，同时也会很大程度上影响性能。</p>
-<ul>
-<li>重绘是当节点需要更改外观而不会影响布局的，比如改变 <code>color</code> 就叫称为重绘</li>
-<li>回流是布局或者几何属性需要改变就称为回流。</li>
-</ul>
-<p>回流<strong>必定</strong>会发生重绘，重绘<strong>不一定</strong>会引发回流。回流所需的成本比重绘高的多，改变父节点里的子节点很可能会导致父节点的一系列回流。</p>
-<p>以下几个动作可能会导致性能问题：</p>
-<ul>
-<li>改变 <code>window</code> 大小</li>
-<li>改变字体</li>
-<li>添加或删除样式</li>
-<li>文字改变</li>
-<li>定位或者浮动</li>
-<li>盒模型</li>
-</ul>
-<p>并且很多人不知道的是，重绘和回流其实也和 Eventloop 有关。</p>
-<ol>
-<li>当 Eventloop 执行完 Microtasks 后，会判断 <code>document</code> 是否需要更新，因为浏览器是 60Hz 的刷新率，每 16.6ms 才会更新一次。</li>
-<li>然后判断是否有 <code>resize</code> 或者 <code>scroll</code> 事件，有的话会去触发事件，所以 <code>resize</code> 和 <code>scroll</code> 事件也是至少 16ms 才会触发一次，并且自带节流功能。</li>
-<li>判断是否触发了 media query</li>
-<li>更新动画并且发送事件</li>
-<li>判断是否有全屏操作事件</li>
-<li>执行 <code>requestAnimationFrame</code> 回调</li>
-<li>执行 <code>IntersectionObserver</code> 回调，该方法用于判断元素是否可见，可以用于懒加载上，但是兼容性不好</li>
-<li>更新界面</li>
-<li>以上就是一帧中可能会做的事情。如果在一帧中有空闲时间，就会去执行 <code>requestIdleCallback</code> 回调。</li>
-</ol>
-<p>以上内容来自于 <a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model">HTML 文档</a>。</p>
-<p>既然我们已经知道了重绘和回流会影响性能，那么接下来我们将会来学习如何减少重绘和回流的次数。</p>
-<h3 id="减少重绘和回流"><a href="#减少重绘和回流" class="headerlink" title="减少重绘和回流"></a>减少重绘和回流</h3><ul>
-<li>使用 <code>transform</code> 替代 <code>top</code></li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;test&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">  .test &#123;</span><br><span class="line"><span class="css">    <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="css">    <span class="attribute">top</span>: <span class="number">10px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">background</span>: red;</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="comment">// 引起回流</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.test&#x27;</span>).style.top = <span class="string">&#x27;100px&#x27;</span></span></span><br><span class="line">  &#125;, 1000)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>使用 <code>visibility</code> 替换 <code>display: none</code> ，因为前者只会引起重绘，后者会引发回流（改变了布局）</p>
-</li>
-<li><p>不要把节点的属性值放在一个循环里当成循环里的变量</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 获取 offsetTop 会导致回流，因为需要去获取正确的值</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">document</span>.querySelector(<span class="string">&#x27;.test&#x27;</span>).style.offsetTop)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不要使用 <code>table</code> 布局，可能很小的一个小改动会造成整个 <code>table</code> 的重新布局</p>
-</li>
-<li><p>动画实现的速度的选择，动画速度越快，回流次数越多，也可以选择使用 <code>requestAnimationFrame</code></p>
-</li>
-<li><p>CSS 选择符<strong>从右往左</strong>匹配查找，避免节点层级过多</p>
-</li>
-<li><p>将频繁重绘或者回流的节点设置为图层，图层能够阻止该节点的渲染行为影响别的节点。比如对于 <code>video</code> 标签来说，浏览器会自动将该节点变为图层。</p>
-<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/050b7528bc47418a893ea02f76cbeebb~tplv-k3u1fbpfcp-watermark.image" alt="img"></p>
-<p>设置节点为图层的方式有很多，我们可以通过以下几个常用属性可以生成新图层</p>
-<ul>
-<li><code>will-change</code></li>
-<li><code>video</code>、<code>iframe</code> 标签</li>
-</ul>
-</li>
-</ul>
-<h3 id="性能优化琐碎事"><a href="#性能优化琐碎事" class="headerlink" title="性能优化琐碎事"></a><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763776151560">性能优化琐碎事</a></h3><h2 id="7-webpack-前端工程化"><a href="#7-webpack-前端工程化" class="headerlink" title="7.webpack/前端工程化"></a>7.webpack/前端工程化</h2><p>发布工具</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763776315399">https://juejin.cn/book/6844733763675488269/section/6844733763776315399</a></p>
-<h2 id="8-算法"><a href="#8-算法" class="headerlink" title="8.算法"></a>8.算法</h2><h3 id="一个树形结构数据，不用递归，如何用遍历去访问它？"><a href="#一个树形结构数据，不用递归，如何用遍历去访问它？" class="headerlink" title="一个树形结构数据，不用递归，如何用遍历去访问它？"></a>一个树形结构数据，不用递归，如何用遍历去访问它？</h3><h2 id="9-综合问题-技术相关"><a href="#9-综合问题-技术相关" class="headerlink" title="9.综合问题/技术相关"></a>9.综合问题/技术相关</h2><h3 id="组件封装"><a href="#组件封装" class="headerlink" title="组件封装"></a>组件封装</h3><h3 id="h5，和pc端有什么不同。"><a href="#h5，和pc端有什么不同。" class="headerlink" title="h5，和pc端有什么不同。"></a>h5，和pc端有什么不同。</h3><h2 id="10-综合问题-职业相关"><a href="#10-综合问题-职业相关" class="headerlink" title="10.综合问题/职业相关"></a>10.综合问题/职业相关</h2><h3 id="请描述一下-React-和-Vue的区别"><a href="#请描述一下-React-和-Vue的区别" class="headerlink" title="请描述一下 React 和 Vue的区别"></a>请描述一下 React 和 Vue的区别</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">1.设计思想</span><br><span class="line">    vue的官网中说它是一款渐进式框架，采用自底向上增量开发的设计。</span><br><span class="line"></span><br><span class="line">    react主张函数式编程，所以推崇纯组件，数据不可变，单向数据流，当然需要双向的地方也可以手动实现，</span><br><span class="line">    比如借助 onChange 和 setState 来实现一个双向的数据流。</span><br><span class="line">2.编写语法</span><br><span class="line">    Vue推荐的做法是webpack+vue-loader的单文件组件格式，vue保留了html、css、js分离的写法</span><br><span class="line"></span><br><span class="line">    React的开发者可能知道，react是没有模板的，直接就是一个渲染函数，它中间返回的就是一个虚拟DOM树，</span><br><span class="line">    React推荐的做法是  JSX + inline style, 也就是把HTML和CSS全都写进JavaScript了,即&#39;all in  js&#39;。</span><br><span class="line">3.构建工具</span><br><span class="line">    vue提供了CLI 脚手架，可以帮助你非常容易地构建项目。</span><br><span class="line"></span><br><span class="line">    React 在这方面也提供了 create-react-app，但是现在还存在一些局限性，不能配置等等</span><br><span class="line">4.数据绑定</span><br><span class="line">    vue是实现了双向数据绑定的mvvm框架，当视图改变更新模型层，当模型层改变更新视图层。</span><br><span class="line">    在vue中，使用了双向绑定技术，就是View的变化能实时让Model发生变化，而Model的变化也能实时更新到View。</span><br><span class="line">    (这里我们可以继续深入讲解一下双向数据绑定的原理，我之前的文章手写Vue源码可参考)</span><br><span class="line"></span><br><span class="line">    react是单向数据流，react中属性是不允许更改的，状态是允许更改的。</span><br><span class="line">    react中组件不允许通过this.state这种方式直接更改组件的状态。自身设置的状态，可以通过setState来进行更改。</span><br><span class="line">    (注意：React中setState是异步的，导致获取dom可能拿的还是之前的内容，</span><br><span class="line">    所以我们需要在setState第二个参数（回调函数）中获取更新后的新的内容。)</span><br><span class="line"></span><br><span class="line">    【这里如果你了解深入的话可以尝试描述一下React中setState的异步操作是怎么实现的，Vue中的更新是通过微任务等】</span><br><span class="line">5.diff算法</span><br><span class="line">    vue中diff算法实现流程：</span><br><span class="line">        1.在内存中构建虚拟dom树</span><br><span class="line">        2.将内存中虚拟dom树渲染成真实dom结构</span><br><span class="line">        3.数据改变的时候，将之前的虚拟dom树结合新的数据生成新的虚拟dom树</span><br><span class="line">        4.将此次生成好的虚拟dom树和上一次的虚拟dom树进行一次比对(diff算法进行比对)，来更新只需要被替换的DOM，</span><br><span class="line">        而不是全部重绘。在Diff算法中，只平层的比较前后两棵DOM树的节点，没有进行深度的遍历。</span><br><span class="line">        5.会将对比出来的差异进行重新渲染</span><br><span class="line"></span><br><span class="line">    react中diff算法实现流程:</span><br><span class="line">        DOM结构发生改变-----直接卸载并重新create</span><br><span class="line">        DOM结构一样-----不会卸载,但是会update变化的内容</span><br><span class="line">        所有同一层级的子节点.他们都可以通过key来区分-----同时遵循1.2两点</span><br><span class="line">        (其实这个key的存在与否只会影响diff算法的复杂度,换言之,你不加key的情况下,</span><br><span class="line">        diff算法就会以暴力的方式去根据一二的策略更新,但是你加了key,diff算法会引入一些另外的操作)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">React会逐个对节点进行更新，转换到目标节点。而最后插入新的节点，涉及到的DOM操作非常多。diff总共就是移动、删除、增加三个操作，而如果给每个节点唯一的标识（key），那么React优先采用移动的方式，能够找到正确的位置去插入新的节点。</span><br><span class="line">vue会跟踪每一个组件的依赖关系，不需要重新渲染整个组件树。而对于React而言,每当应用的状态被改变时,全部组件都会重新渲染,所以react中会需要shouldComponentUpdate这个生命周期函数方法来进行控制。</span><br></pre></td></tr></table></figure>
-
-<p>以上内容来自于<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/301860721/answer/815280420?utm_source=wechat_session&utm_medium=social&s_s_i=lOSRE5VQBsAkcRRzZ2dIMWgHle1bUOGSRO9eO47VeUs=&s_r=1">Vue 和 React 的优点分别是什么？</a>，大家说的越多理解的越深越好。我只说了其中的三点。</p>
-<h3 id="前端常用的数据请求格式有哪些？都有些什么特点？"><a href="#前端常用的数据请求格式有哪些？都有些什么特点？" class="headerlink" title="前端常用的数据请求格式有哪些？都有些什么特点？"></a>前端常用的数据请求格式有哪些？都有些什么特点？</h3><p>这个问题在http中已经回答了一部分了，这里就在单独详细的描述一下使用场景</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Get&#x2F;Post&#x2F;Delete&#x2F;Patch&#x2F;Put经常用的这五种，其他的就不说了</span><br><span class="line"></span><br><span class="line">通常：</span><br><span class="line">    我们使用Get请求来获取数据</span><br><span class="line">    我们使用Post请求来发送数据</span><br><span class="line">    我们使用Put请求来更新数据</span><br><span class="line">    我们使用Delete请求来删除数据</span><br><span class="line">    我们使用Patch请求用于对资源应用部分修改。</span><br><span class="line">Get和Post的区别：</span><br><span class="line">    1.Get 请求能缓存，Post 不能</span><br><span class="line">    2.Post 相对 Get 安全一点点，因为Get 请求都包含在 URL 里，</span><br><span class="line">    （当然你想写到 body 里也是可以的），且会被浏览器保存历史纪录。Post 不会，但是在抓包的情况下都是一样的。</span><br><span class="line">    4.URL有长度限制，会影响 Get 请求，但是这个长度限制是浏览器规定的，不是 RFC 规定的</span><br><span class="line">    5.Post 支持更多的编码类型且不对数据类型限制</span><br></pre></td></tr></table></figure>
-
-<h3 id="二次封装axios，描述一下你在项目中封装axios的思路和想法"><a href="#二次封装axios，描述一下你在项目中封装axios的思路和想法" class="headerlink" title="二次封装axios，描述一下你在项目中封装axios的思路和想法"></a>二次封装axios，描述一下你在项目中封装axios的思路和想法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">关于axios等封装，我之前有一篇简易封装axios的文章，大家可以简单参考。</span><br><span class="line"></span><br><span class="line">通常来说，我们在二次封装axios，一般会引入UI组件的一些Message和Loading组件用来做提示信息。</span><br><span class="line">    1.通过获取存储在浏览器端，或者是vuex中的token信息，判断是否跳转登录页面</span><br><span class="line">    2.在获取到token的情况下设置自定义请求头部信息</span><br><span class="line">    3.在响应事件中，根据返回的不同状态码，根据业务需求，使用switch判断跳转页面还是发出提示信息。</span><br><span class="line">    4.封装请求和响应事件的返回结果，使用Promise封装。</span><br><span class="line">    5.增加请求loading和提示信息。</span><br><span class="line">简单版本大致如上，复杂版本需要根据业务进行对应的封装。</span><br></pre></td></tr></table></figure>
-
-<h3 id="请用一个例子来形象的描述原型链"><a href="#请用一个例子来形象的描述原型链" class="headerlink" title="请用一个例子来形象的描述原型链"></a>请用一个例子来形象的描述原型链</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">每个门派都有一个祖师爷。</span><br><span class="line"></span><br><span class="line">学徒在山上学艺，学成下山后谨记师门教导，施展一身武艺。</span><br><span class="line"></span><br><span class="line">恰逢一日对敌，面对敌人的怪异武功，师门好像未曾教过破解之法，便高喊一声祖师爷救我，</span><br><span class="line"></span><br><span class="line">刹那间一道白光降于头顶，祖师爷灵魂附体，一套精绝凌厉的拳法杀得敌人措手不及。</span><br><span class="line"></span><br><span class="line">但敌人也极是难缠，恐怕非要那门传说中从天而降的掌法才能制敌。</span><br><span class="line"></span><br><span class="line">你心中暗自着急，催促着祖师爷赶快发招，这时只听身内传来了祖师的声音：</span><br><span class="line"></span><br><span class="line">“MD这破掌法当年偷懒没学，我去把我师祖也叫来问问...”</span><br><span class="line"></span><br><span class="line">每个门派(FunctionX)都有一个祖师爷(prototype)。</span><br><span class="line"></span><br><span class="line">学徒(object)在山上学艺(&#x3D; new FunctionX)，学成下山后谨记师门教导，</span><br><span class="line"></span><br><span class="line">施展一身武艺(http:&#x2F;&#x2F;object.xxxobject.xxx)。</span><br><span class="line"></span><br><span class="line">恰逢一日对敌，面对敌人的怪异武功，师门好像未曾教过破解之法(object对象没有yyy方法)，</span><br><span class="line"></span><br><span class="line">便高喊一声祖师爷救我，刹那间一道白光降于头顶，祖师爷(__proto__)灵魂附体，</span><br><span class="line"></span><br><span class="line">一套精绝凌厉的拳法杀得敌人措手不及(继续寻找原型中是否有yyy方法)。</span><br><span class="line"></span><br><span class="line">但敌人也极是难缠，恐怕非要那门传说中从天而降的掌法才能制敌。你心中暗自着急，</span><br><span class="line"></span><br><span class="line">催促着祖师爷赶快发招，这时只听身内传来了祖师的声音：</span><br><span class="line"></span><br><span class="line">“MD这破掌法当年偷懒没学，我去把我师祖也叫来问问...”（如果原型中没有yyy方法，则继续查找原型的原型，是谓原型链）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="做过单点登录吗？了解他是怎么实现的吗？"><a href="#做过单点登录吗？了解他是怎么实现的吗？" class="headerlink" title="做过单点登录吗？了解他是怎么实现的吗？"></a>做过单点登录吗？了解他是怎么实现的吗？</h3><p>实话实说没做过，但我看过一些关于单点登录的技术博客，大概整理原理如下：</p>
-<p>概念：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">简称为 SSO，是目前比较流行的企业业务整合的解决方案之一。SSO的定义是在多个应用系统中，</span><br><span class="line">用户只需要登录一次就可以访问所有相互信任的应用系统。</span><br><span class="line"></span><br><span class="line">列如：淘宝、天猫都属于阿里旗下的产品，当用户登录淘宝后，再打开天猫，系统便自动帮用户</span><br><span class="line">登录了天猫，这种就是用单点登录实现的。</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>流程：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1、用户访问A系统，系统A发现用户未登录，跳转至sso认证中心，并把自己的地址作为参数。</span><br><span class="line">2、sso认证中心发现用户未登录，则引导用户到登录页面。</span><br><span class="line">3、用户输入用户名和密码提交登录。</span><br><span class="line">4、sso认证中心验证用户信息，创建用户-&gt;sso之间的会话（全局会话），同时创建授权令牌。</span><br><span class="line">5、sso认证中心带着令牌跳转到A系统</span><br><span class="line">6、系统A拿到令牌，去sso认证中心校验令牌是否有效。</span><br><span class="line">7、sso认证中心校验令牌，返回有效，注册系统A。</span><br><span class="line">8、系统A使用该令牌创建与用户的会话（局部会话），返回请求资源。</span><br><span class="line">9、用户访问系统B。</span><br><span class="line">10、系统B发现用户未登录，跳转至sso认证中心，也将自己的地址作为参数。</span><br><span class="line">11、sso认证中心发现用户已登录，跳转到系统B，并附上令牌。</span><br><span class="line">12、系统B拿到令牌，去sso认证中心校验令牌是否有效。</span><br><span class="line">13、sso认证中心校验令牌，返回有效，注册系统B。</span><br><span class="line">14、系统B使用该令牌创建与用户的局部会话，返回请求资源。</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
-
-<p>注意：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、局部会话存在，全局会话一定存在</span><br><span class="line">2、全局会话存在，局部会话不一定存在</span><br><span class="line">3、全局会话销毁，局部会话必须销毁</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="说下工作中你解决的觉得最难的事情是什么"><a href="#说下工作中你解决的觉得最难的事情是什么" class="headerlink" title="说下工作中你解决的觉得最难的事情是什么"></a>说下工作中你解决的觉得最难的事情是什么</h3><p>还记得上篇文章中第一家公司我便遇到了这个问题，不知道怎么答才好，于是我问他们技术总监下次我该怎么答，这次我就根据上次总结后展开说了，我说我项目比较简单，技术上没有太难的东西，真的觉得难还是自己负责项目开发时，关于项目推进，如何与同事有效沟通等等展开说了。</p>
-<p>所以说要多总结啊，别一个问题次次遇到都是不知道，没听过，不了解，面试过程中不管任何问题，只要你开头答了，都比你啥都不说要强，而且是强很多，这也是考你随机应变的一部分。</p>
-<p>知道为什么很多公司要问这两个问题吗？因为这两个问题的答案，基本能给你以往经历定级了，有没有解决过特别复杂的问题，有没有技术深入研究，有没有代码追求等等在你的答案中都能体现出来。所以这两个问题一定要好好回顾自己过往经历，好公司必问！</p>
-<h3 id="谈谈你对于未来的规划"><a href="#谈谈你对于未来的规划" class="headerlink" title="谈谈你对于未来的规划"></a>谈谈你对于未来的规划</h3><p>初步规划是想向全栈发展，再往后就是管理层。然后面试官就问我为什么想转全栈，我说为了提升自己的竞争力，我有关注招聘信息，从中我能得知现在行业需要什么技术，哪些能提升我的竞争力；面试官又问为什么有做管理的想法，这个我就直说了，同事朋友都觉得性格很好，有耐心，对于技术也有追求，很适合带人，当然，做管理不是技术好就可以了，只是他们的话在我脑中留下了一枚种子，如果真要往这方面发展，我需要学习的还很多。</p>
-<p>说完这些面试官就对于我未来发展给出建议了，大致意思就是，学后端能拓展你对于前端问题的看法，比如很多问题在前端会遇到后端就不会，比如一个问题在前端做很麻烦，但在后端有专门的思路方法解决这件事，那么在你了解后端后，下次你遇到这样的问题，在你的脑中会潜移默化，我如何在前端中用后端现有思路解决它。其实总结面试官的话，永远学思想而不是学框架。</p>
-<h3 id="在上家公司有没有你觉得可以改进的事"><a href="#在上家公司有没有你觉得可以改进的事" class="headerlink" title="在上家公司有没有你觉得可以改进的事"></a>在上家公司有没有你觉得可以改进的事</h3><h3 id="说说你对于技术新旧的看法，如何抉择？"><a href="#说说你对于技术新旧的看法，如何抉择？" class="headerlink" title="说说你对于技术新旧的看法，如何抉择？"></a>说说你对于技术新旧的看法，如何抉择？</h3><p>下面是我面试回答的观点，不一定对，大家就当个参考：</p>
-<p>新不代表好，旧不代表过时，如何选择还是看它能为我们带来什么，优势是什么，缺点是什么，比如风险和不稳定性。举个例子，JQ过时吗？其实站在DOM操作层面，JQ在各浏览器间优秀的兼容性以及操作便捷性，无疑是一个不错的选择，它为什么”过时”呢？这是因为目前主流框架vue，angular，react已经不需要我们过多关注视图层，操作dom的需求少了这才导致JQ”过时”。</p>
-<p>如何抉择一个框架呢？我觉得得看它与我们需求的匹配度，拿bootstrap举例，很多人不爱使用bootstrap，觉得我自己也能做适配，何必用它。这就得看具体需求了，如果我们一个项目是要做到PC，平板，移动端自动适配，用bootstrap就是首选，因为这个框架主打的就是栅格化系统一套样式实现响应式，让你自己用媒体查询自己写，那不得写疯。但如果我们兼容的只是部分容器，需求不大，这时候用bootstrap就有种杀鸡焉用牛刀的感觉，很不值得，所以怎么选还是得根据需求而定。</p>
-<h3 id="为什么从上家公司离职？"><a href="#为什么从上家公司离职？" class="headerlink" title="为什么从上家公司离职？"></a>为什么从上家公司离职？</h3><p>两个方面，一是公司开发需求少，有种温水煮青蛙的感觉，会很焦虑，害怕自己被这个行业淘汰，所以顶着疫情也要选择离职。第二个方面是孤独，公司技术氛围不是很好，大家对于技术热情不是很高，我会学很多有用的知识，想讨论却发现没一个人可以交流，因为渴望交流，所以养成了写博客的习惯，与网上同行们交流。</p>
-<h3 id="如何写好一封简历"><a href="#如何写好一封简历" class="headerlink" title="如何写好一封简历"></a><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763801350158">如何写好一封简历</a></h3><h3 id="面试常用技巧"><a href="#面试常用技巧" class="headerlink" title="面试常用技巧"></a><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763801317389">面试常用技巧</a></h3><h2 id="前端安全"><a href="#前端安全" class="headerlink" title="前端安全"></a><a target="_blank" rel="noopener" href="https://juejin.cn/book/6844733763675488269/section/6844733763776151565">前端安全</a></h2><p>课件</p>
-<h2 id="ES6新特性"><a href="#ES6新特性" class="headerlink" title="ES6新特性"></a>ES6新特性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">1.ES6引入来严格模式</span><br><span class="line">    变量必须声明后在使用</span><br><span class="line">    函数的参数不能有同名属性, 否则报错</span><br><span class="line">    不能使用with语句 (说实话我基本没用过)</span><br><span class="line">    不能对只读属性赋值, 否则报错</span><br><span class="line">    不能使用前缀0表示八进制数,否则报错 (说实话我基本没用过)</span><br><span class="line">    不能删除不可删除的数据, 否则报错</span><br><span class="line">    不能删除变量delete prop, 会报错, 只能删除属性delete global[prop]</span><br><span class="line">    eval不会在它的外层作用域引入变量</span><br><span class="line">    eval和arguments不能被重新赋值</span><br><span class="line">    arguments不会自动反映函数参数的变化</span><br><span class="line">    不能使用arguments.caller (说实话我基本没用过)</span><br><span class="line">    不能使用arguments.callee (说实话我基本没用过)</span><br><span class="line">    禁止this指向全局对象</span><br><span class="line">    不能使用fn.caller和fn.arguments获取函数调用的堆栈 (说实话我基本没用过)</span><br><span class="line">    增加了保留字（比如protected、static和interface）</span><br><span class="line"></span><br><span class="line">2.关于let和const新增的变量声明</span><br><span class="line"></span><br><span class="line">3.变量的解构赋值</span><br><span class="line"></span><br><span class="line">4.字符串的扩展</span><br><span class="line">    includes()：返回布尔值，表示是否找到了参数字符串。</span><br><span class="line">    startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。</span><br><span class="line">    endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部。</span><br><span class="line">5.数值的扩展</span><br><span class="line">    Number.isFinite()用来检查一个数值是否为有限的（finite）。</span><br><span class="line">    Number.isNaN()用来检查一个值是否为NaN。</span><br><span class="line">6.函数的扩展</span><br><span class="line">    函数参数指定默认值</span><br><span class="line">7.数组的扩展</span><br><span class="line">    扩展运算符</span><br><span class="line">8.对象的扩展</span><br><span class="line">    对象的解构</span><br><span class="line">9.新增symbol数据类型</span><br><span class="line"></span><br><span class="line">10.Set 和 Map 数据结构</span><br><span class="line">    ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。 Set 本身是一个构造函数，用来生成 Set 数据结构。</span><br><span class="line"></span><br><span class="line">    Map它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。</span><br><span class="line">11.Proxy</span><br><span class="line">    Proxy 可以理解成，在目标对象之前架设一层“拦截”，外界对该对象的访问</span><br><span class="line">    都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。</span><br><span class="line">    Proxy 这个词的原意是代理，用在这里表示由它来“代理”某些操作，可以译为“代理器”。</span><br><span class="line">    Vue3.0使用了proxy</span><br><span class="line">12.Promise</span><br><span class="line">    Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。</span><br><span class="line">    特点是：</span><br><span class="line">        对象的状态不受外界影响。</span><br><span class="line">        一旦状态改变，就不会再变，任何时候都可以得到这个结果。</span><br><span class="line">13.async 函数</span><br><span class="line">    async函数对 Generator 函数的区别：</span><br><span class="line">    （1）内置执行器。</span><br><span class="line">    Generator 函数的执行必须靠执行器，而async函数自带执行器。也就是说，async函数的执行，与普通函数一模一样，只要一行。</span><br><span class="line">    （2）更好的语义。</span><br><span class="line">    async和await，比起星号和yield，语义更清楚了。async表示函数里有异步操作，await表示紧跟在后面的表达式需要等待结果。</span><br><span class="line">    （3）正常情况下，await命令后面是一个 Promise 对象。如果不是，会被转成一个立即resolve的 Promise 对象。</span><br><span class="line">    （4）返回值是 Promise。</span><br><span class="line">    async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了。你可以用then方法指定下一步的操作。</span><br><span class="line">14.Class</span><br><span class="line">    class跟let、const一样：不存在变量提升、不能重复声明...</span><br><span class="line">    ES6 的class可以看作只是一个语法糖，它的绝大部分功能</span><br><span class="line">    ES5 都可以做到，新的class写法只是让对象原型的写法更加清晰、更像面向对象编程的语法而已。</span><br><span class="line">15.Module</span><br><span class="line">    ES6 的模块自动采用严格模式，不管你有没有在模块头部加上&quot;use strict&quot;;。</span><br><span class="line">    import和export命令以及export和export default的区别</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="前端-100-问"><a href="#前端-100-问" class="headerlink" title="前端 100 问"></a><a target="_blank" rel="noopener" href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues">前端 100 问</a></h2><h2 id="简历"><a href="#简历" class="headerlink" title="简历"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904034218803214">简历</a></h2><h2 id="面试指南"><a href="#面试指南" class="headerlink" title="面试指南"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904029340827656">面试指南</a></h2><h2 id="Typescript"><a href="#Typescript" class="headerlink" title="Typescript"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6872111128135073806">Typescript</a></h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/26/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cklm3qf3z0001h0suhzffh7c6" data-title="2021面试复习笔记" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/02/26/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-02-26T09:29:03.743Z" itemprop="datePublished">2021-02-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/02/26/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/26/hello-world/" data-id="cklm3qf3l0000h0sugew22zgz" data-title="Hello World" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/02/26/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/">2021面试复习笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2021/02/26/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">1</div></a></div></div></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2021/02/26/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="2021面试复习笔记">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2021面试复习笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/02/26/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="2021面试复习笔记">2021面试复习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-02-25T16:00:00.000Z" title="Created 2021-02-26 00:00:00">2021-02-26</time></span></div><div class="content">全方面面试总结1.javascriptJS面试题JS面试题手写无敌JSjavascript深入原始类型(基础类型)
+boolean
+null
+undefined
+number
+string
+symbol
+
+null不是对象类型,虽然 typeof null 会输出 object，但是这只是 JS 存在的一个悠久 Bug.
+对象（Object）类型对象类型和原始类型不同的是，原始类型存储的是值，对象类型存储的是地址（指针）。
+typeof vs instanceof涉及面试题：typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？
+typeof 对于原始类型来说，除了 null 都可以显示正确的类型
+12345typeof 1 // &#x27;number&#x27;typeof &#x27;1&#x27; // &#x27;string&#x27;typeof undefined // &#x27;undefined&#x27;typeof true // &#x27;boolean&#x27;typeof Symbol() // &#x27;symbo ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/null" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">1</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/02/26/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="2021面试复习笔记"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2021面试复习笔记"/></a><div class="content"><a class="title" href="/2021/02/26/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="2021面试复习笔记">2021面试复习笔记</a><time datetime="2021-02-25T16:00:00.000Z" title="Created 2021-02-26 00:00:00">2021-02-26</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">1</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-02-26T09:56:03.682Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
