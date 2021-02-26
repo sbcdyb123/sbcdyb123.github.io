@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VUE源码之计算属性和监听属性，到底该用谁？ | 想过好生活的大蛋-小站</title><meta name="keywords" content="vue,源码"><meta name="author" content="想过好生活的大蛋"><meta name="copyright" content="想过好生活的大蛋"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言上一篇我们分析了Vue的响应式原理，今天我们来搞一下，Vue的计算属性和监听属性的实现原理，以让我们更清楚什么时候该使用computed，什么时候该使用watch，以及为什么官方不建议使用watch？ 正文还记得我们在data渲染视图中讲的，New Vue()会发生什么么？这其中有一段源代码： 1234567891011&#x2F;*  初始化状态 *&#x2F;export function">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VUE源码之计算属性和监听属性，到底该用谁？">
+<meta property="og:url" content="http://example.com/2020/11/07/vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8B%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7VS%E7%9B%91%E5%90%AC%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:site_name" content="想过好生活的大蛋-小站">
+<meta property="og:description" content="前言上一篇我们分析了Vue的响应式原理，今天我们来搞一下，Vue的计算属性和监听属性的实现原理，以让我们更清楚什么时候该使用computed，什么时候该使用watch，以及为什么官方不建议使用watch？ 正文还记得我们在data渲染视图中讲的，New Vue()会发生什么么？这其中有一段源代码： 1234567891011&#x2F;*  初始化状态 *&#x2F;export function">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s3.ax1x.com/2021/02/26/yzTpOP.png">
+<meta property="article:published_time" content="2020-11-07T12:45:15.000Z">
+<meta property="article:modified_time" content="2021-02-26T14:06:51.629Z">
+<meta property="article:author" content="想过好生活的大蛋">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="源码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.ax1x.com/2021/02/26/yzTpOP.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2020/11/07/vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8B%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7VS%E7%9B%91%E5%90%AC%E5%B1%9E%E6%80%A7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?44bd70b32d70c5b8aacec8b367d4a1c9";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-02-26 22:06:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://s3.ax1x.com/2021/02/26/yzIbCj.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s3.ax1x.com/2021/02/26/yzTpOP.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">想过好生活的大蛋-小站</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">VUE源码之计算属性和监听属性，到底该用谁？</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-07T12:45:15.000Z" title="发表于 2020-11-07 20:45:15">2020-11-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-02-26T14:06:51.629Z" title="更新于 2021-02-26 22:06:51">2021-02-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2020/11/07/vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8B%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7VS%E7%9B%91%E5%90%AC%E5%B1%9E%E6%80%A7/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2020/11/07/vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8B%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7VS%E7%9B%91%E5%90%AC%E5%B1%9E%E6%80%A7/" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>上一篇我们分析了Vue的响应式原理，今天我们来搞一下，Vue的计算属性和监听属性的实现原理，以让我们更清楚什么时候该使用computed，什么时候该使用watch，以及为什么官方不建议使用watch？</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>还记得我们在data渲染视图中讲的，New Vue()会发生什么么？这其中有一段源代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*  初始化状态 *&#x2F;</span><br><span class="line">export function initState (vm: Component) &#123;</span><br><span class="line">  &#x2F;&#x2F; ...</span><br><span class="line">  &#x2F;*初始化computed*&#x2F;</span><br><span class="line">  if (opts.computed) initComputed(vm, opts.computed)</span><br><span class="line">  &#x2F;*初始化watchers*&#x2F;</span><br><span class="line">  if (opts.watch &amp;&amp; opts.watch !&#x3D;&#x3D; nativeWatch) &#123;</span><br><span class="line">    initWatch(vm, opts.watch)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以看出我们在new Vue()之后，会执行initState方法，该方法去初始化initComputed（计算）和initWatch（监听），我们首先看计算属性；</p>
+<h2 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h2><p>先看initComputed<br>源码：src/core/instance/state.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* 为了在属性值不变的情况下get()只执行一次而设置的标志位，下边会讲的 *&#x2F;</span><br><span class="line">const computedWatcherOptions &#x3D; &#123; lazy: true &#125;</span><br><span class="line">&#x2F;* 初始化computed *&#x2F;</span><br><span class="line">function initComputed (vm: Component, computed: Object) &#123;</span><br><span class="line">  const watchers &#x3D; vm._computedWatchers &#x3D; Object.create(null)</span><br><span class="line">  &#x2F;* 循环计算属性，给每个属性添加Watcher监听，不知道Watcher干什么的可以去看https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;6844904045694418951#heading-13 *&#x2F;</span><br><span class="line">  for (const key in computed) &#123;</span><br><span class="line">    const userDef &#x3D; computed[key]</span><br><span class="line">    &#x2F;* 拿get方法 *&#x2F;</span><br><span class="line">    const getter &#x3D; typeof userDef &#x3D;&#x3D;&#x3D; &#39;function&#39; ? userDef : userDef.get</span><br><span class="line">      &#x2F;* 添加watcher监听 *&#x2F;</span><br><span class="line">      watchers[key] &#x3D; new Watcher(</span><br><span class="line">        vm,</span><br><span class="line">        getter || noop,</span><br><span class="line">        noop,</span><br><span class="line">        computedWatcherOptions</span><br><span class="line">      )</span><br><span class="line"></span><br><span class="line">    if (!(key in vm)) &#123;</span><br><span class="line">      defineComputed(vm, key, userDef)</span><br><span class="line">    &#125; else if (process.env.NODE_ENV !&#x3D;&#x3D; &#39;production&#39;) &#123;</span><br><span class="line">      &#x2F;* 如果定义的计算属性在data或者props中已经被定义过了，会报警告 *&#x2F;</span><br><span class="line">      if (key in vm.$data) &#123;</span><br><span class="line">        warn(&#96;The computed property &quot;$&#123;key&#125;&quot; is already defined in data.&#96;, vm)</span><br><span class="line">      &#125; else if (vm.$options.props &amp;&amp; key in vm.$options.props) &#123;</span><br><span class="line">        warn(&#96;The computed property &quot;$&#123;key&#125;&quot; is already defined as a prop.&#96;, vm)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>那么我们重点看一下defineComputed的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 定义计算属性</span><br><span class="line"> * @param     &#123;Object | Function&#125;    userDef     计算属性的值</span><br><span class="line"> *&#x2F;</span><br><span class="line">export function defineComputed (</span><br><span class="line">  target: any,</span><br><span class="line">  key: string,</span><br><span class="line">  userDef: Object | Function</span><br><span class="line">) &#123;</span><br><span class="line">  &#x2F;* 非服务端渲染，执行createComputedGetter *&#x2F;</span><br><span class="line">  const shouldCache &#x3D; !isServerRendering()</span><br><span class="line">  &#x2F;* 计算属性是函数时 *&#x2F;</span><br><span class="line">  if (typeof userDef &#x3D;&#x3D;&#x3D; &#39;function&#39;) &#123;</span><br><span class="line">    sharedPropertyDefinition.get &#x3D; shouldCache</span><br><span class="line">      ? createComputedGetter(key)</span><br><span class="line">      : createGetterInvoker(userDef)</span><br><span class="line">      &#x2F;* noop是一个空函数，Vue中定义的工具函数 *&#x2F;</span><br><span class="line">    sharedPropertyDefinition.set &#x3D; noop</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    &#x2F;* 计算属性是对象时 *&#x2F;</span><br><span class="line">    sharedPropertyDefinition.get &#x3D; userDef.get</span><br><span class="line">      ? shouldCache &amp;&amp; userDef.cache !&#x3D;&#x3D; false</span><br><span class="line">        ? createComputedGetter(key)</span><br><span class="line">        : createGetterInvoker(userDef.get)</span><br><span class="line">      : noop</span><br><span class="line">    sharedPropertyDefinition.set &#x3D; userDef.set || noop</span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; ...</span><br><span class="line">  Object.defineProperty(target, key, sharedPropertyDefinition)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以看出，本质上就是利用Object.defineProperty去给属性添加setter和getter，并且无论计算属性是函数还是对象，都会去执行createComputedGetter方法，并传入属性键。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function createComputedGetter (key) &#123;</span><br><span class="line">  &#x2F;* 返回一个函数，即对应的getter *&#x2F;</span><br><span class="line">  return function computedGetter () &#123;</span><br><span class="line">    &#x2F;* this._computedWatchers是在initComputed方法中定义的一个空对象 *&#x2F;</span><br><span class="line">    const watcher &#x3D; this._computedWatchers &amp;&amp; this._computedWatchers[key]</span><br><span class="line">    if (watcher) &#123;</span><br><span class="line">      &#x2F;*****</span><br><span class="line">      Watcher中有evaluate这么一个方法，当取到get()值以后，将dirty置为false，那么下次再去取这个计算属性值的时候因为dirty已经变为false了，就不会再去执行get()方法了，而是用的之前的取的值，这就是computed的缓存机制</span><br><span class="line">      evaluate () &#123;</span><br><span class="line">        this.value &#x3D; this.get()</span><br><span class="line">        this.dirty &#x3D; false</span><br><span class="line">      &#125;</span><br><span class="line">      ******&#x2F;</span><br><span class="line"></span><br><span class="line">      if (watcher.dirty) &#123;</span><br><span class="line">        watcher.evaluate()</span><br><span class="line">      &#125;</span><br><span class="line">      &#x2F;* 为了避免重新渲染的时候，计算属性渲染的部分不被重新渲染，因此进行依赖收集 *&#x2F;</span><br><span class="line">      if (Dep.target) &#123;</span><br><span class="line">        watcher.depend()</span><br><span class="line">      &#125;</span><br><span class="line">      &#x2F;* 返回属性值 *&#x2F;</span><br><span class="line">      return watcher.value</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>createComputedGetter方法返回一个函数，即对应的是getter方法，该方法主要是返回watcher的值，也就是getter的值，看Watcher的源码我们可以发现dirty的值就是lazy, 而上边说的const computedWatcherOptions = { lazy: true }，lazy初始值为true,并在上边initComputed方法中合并给Watcher了，因此计算属性在属性值不变的情况下，只会去执行一次get()方法取值，这也就是为什么Vue的计算属性有缓存作用。</p>
+<hr>
+<p>我们举个例子看一下computed和watch的不同，我们知道computed也会对数据尽心监听，下边我们把计算属性的监听暂且叫做computed watcher</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var vm &#x3D; new Vue(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    firstName: &#39;yang&#39;,</span><br><span class="line">    lastName: &#39;bo&#39;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    fullName: function () &#123;</span><br><span class="line">      return this.firstName + &#39; &#39; + this.lastName</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当初始化fullName时，我们会执行到Watcher<br>源码：/src/core/observer/watcher.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">constructor () &#123;</span><br><span class="line">    &#x2F;* 这一步是给computed watcher设置的，计算属性并不会去立刻求值 *&#x2F;</span><br><span class="line">    this.value &#x3D; this.lazy</span><br><span class="line">      ? undefined</span><br><span class="line">      : this.get()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后当render函数访问到this.fullName的时候，就会触发计算属性的getter,它会拿到计算属性对应的watcher,然后执行watcher.depend()进行依赖收集。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">depend () &#123;</span><br><span class="line">    let i &#x3D; this.deps.length</span><br><span class="line">    while (i--) &#123;</span><br><span class="line">      this.deps[i].depend()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后还执行了watcher.evaluate()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">evaluate () &#123;</span><br><span class="line">    this.value &#x3D; this.get()</span><br><span class="line">    this.dirty &#x3D; false</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这个方法我们上边已经讲了，就不啰嗦了。我们在看Watcher中的get方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">get () &#123;</span><br><span class="line">    &#x2F;* 收集Watcher实例，也就是Dep.target *&#x2F;</span><br><span class="line">    pushTarget(this)</span><br><span class="line">    let value</span><br><span class="line">    const vm &#x3D; this.vm</span><br><span class="line">    try &#123;</span><br><span class="line">      value &#x3D; this.getter.call(vm, vm)</span><br><span class="line">    &#125;</span><br><span class="line">    return value</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>get执行了getter方法，也就是我们例子中的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">this.firstName + &#39; &#39; + this.lastName</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>然后拿到计算属性最后的value值。</p>
+<h2 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h2><p>watch初始化也是在initState方法中，上边已经讲到了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (opts.watch &amp;&amp; opts.watch !&#x3D;&#x3D; nativeWatch) &#123;</span><br><span class="line">  initWatch(vm, opts.watch)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>来看一下 initWatch 的实现<br>源码：src/core/instance/state.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 初始化侦听</span><br><span class="line"> *&#x2F;</span><br><span class="line">function initWatch (vm: Component, watch: Object) &#123;</span><br><span class="line">  for (const key in watch) &#123;</span><br><span class="line">    const handler &#x3D; watch[key]</span><br><span class="line">    if (Array.isArray(handler)) &#123;</span><br><span class="line">      for (let i &#x3D; 0; i &lt; handler.length; i++) &#123;</span><br><span class="line">        createWatcher(vm, key, handler[i])</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      createWatcher(vm, key, handler)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里就是对 watch 对象做遍历，拿到每一个 handler，因为 Vue 是支持 watch 的同一个 key 对应多个 handler，所以如果 handler 是一个数组，则遍历这个数组，调用 createWatcher 方法，否则直接调用 createWatcher</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function createWatcher (</span><br><span class="line">  vm: Component,</span><br><span class="line">  expOrFn: string | Function,</span><br><span class="line">  handler: any,</span><br><span class="line">  options?: Object</span><br><span class="line">) &#123;</span><br><span class="line">  if (isPlainObject(handler)) &#123;</span><br><span class="line">    options &#x3D; handler</span><br><span class="line">    handler &#x3D; handler.handler</span><br><span class="line">  &#125;</span><br><span class="line">  if (typeof handler &#x3D;&#x3D;&#x3D; &#39;string&#39;) &#123;</span><br><span class="line">    handler &#x3D; vm[handler]</span><br><span class="line">  &#125;</span><br><span class="line">  return vm.$watch(expOrFn, handler, options)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首先对 hanlder 的类型做判断，拿到它最终的回调函数，最后调用 <code>vm.$watch(keyOrFn, handler, options)</code> 函数，$watch 是 Vue 原型上的方法，它是在执行 stateMixin 的时候定义的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">export function stateMixin (Vue: Class&lt;Component&gt;) &#123;</span><br><span class="line">  &#x2F;&#x2F; ...</span><br><span class="line">  Vue.prototype.$watch &#x3D; function (</span><br><span class="line">    expOrFn: string | Function,</span><br><span class="line">    cb: any,</span><br><span class="line">    options?: Object</span><br><span class="line">  ): Function &#123;</span><br><span class="line">    const vm: Component &#x3D; this</span><br><span class="line">    if (isPlainObject(cb)) &#123;</span><br><span class="line">      return createWatcher(vm, expOrFn, cb, options)</span><br><span class="line">    &#125;</span><br><span class="line">    options &#x3D; options || &#123;&#125;</span><br><span class="line">    &#x2F;* 用户自定义watch *&#x2F;</span><br><span class="line">    options.user &#x3D; true</span><br><span class="line">    const watcher &#x3D; new Watcher(vm, expOrFn, cb, options)</span><br><span class="line">    if (options.immediate) &#123;</span><br><span class="line">      try &#123;</span><br><span class="line">        cb.call(vm, watcher.value)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;* 返回卸载watcher的方法 *&#x2F;</span><br><span class="line">    return function unwatchFn () &#123;</span><br><span class="line">      watcher.teardown()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>侦听属性 watch 最终会调用 <code>$watch</code> 方法，这个方法首先判断 cb 如果是一个对象，则调用 createWatcher 方法，这是因为 $watch 方法是用户可以直接调用的，它可以传递一个对象，也可以传递函数。接着执行 const watcher = new Watcher(vm, expOrFn, cb, options) 实例化了一个 watcher，这里需要注意一点这是一个 user watcher，因为 options.user = true。通过实例化 watcher 的方式，一旦我们 watch 的数据发生变化，它最终会执行 watcher 的 run 方法，执行回调函数 cb，并且如果我们设置了 immediate 为 true，则直接会执行回调函数 cb。最后返回了一个 unwatchFn 方法，它会调用 teardown 方法去移除这个 watcher<br>所以本质上侦听属性也是基于 Watcher 实现的，它是一个 user watcher。其实 Watcher 支持了不同的类型，下面我们梳理一下它有哪些类型以及它们的作用。</p>
+<h2 id="Watcher-Options"><a href="#Watcher-Options" class="headerlink" title="Watcher Options"></a>Watcher Options</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (options) &#123;</span><br><span class="line">  this.deep &#x3D; !!options.deep &#x2F;&#x2F; 深度监听</span><br><span class="line">  this.user &#x3D; !!options.user &#x2F;&#x2F; 在对 watcher 求值以及在执行回调函数的时候，会处理一下错误</span><br><span class="line">  this.lazy &#x3D; !!options.lazy &#x2F;&#x2F; 惰性求值，赋值给this.dirty，计算属性的时候用到的</span><br><span class="line">  this.sync &#x3D; !!options.sync &#x2F;&#x2F; 在当前 Tick 中同步执行 watcher 的回调函数，否则响应式数据发生变化之后，watcher回调会在nextTick后执行；</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>所以 watcher 总共有 4 种类型，我们来一一分析它们，看看不同的类型执行的逻辑有哪些差别</p>
+<h3 id="deep-watcher"><a href="#deep-watcher" class="headerlink" title="deep watcher"></a>deep watcher</h3><p>也就是我们通常说的深度监听，看一下我们如果将一个对象进行深度监听会发生什么：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">get () &#123;</span><br><span class="line">  if (this.deep) &#123;</span><br><span class="line">    traverse(value)</span><br><span class="line">  &#125;</span><br><span class="line">  return value</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>看一下traverse源码：src/core/observer/traverse.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">export function traverse (val: any) &#123;</span><br><span class="line">  _traverse(val, seenObjects)</span><br><span class="line">  seenObjects.clear()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function _traverse (val: any, seen: SimpleSet) &#123;</span><br><span class="line">  let i, keys</span><br><span class="line">  const isA &#x3D; Array.isArray(val)</span><br><span class="line">  if ((!isA &amp;&amp; !isObject(val)) || Object.isFrozen(val) || val instanceof VNode) &#123;</span><br><span class="line">    return</span><br><span class="line">  &#125;</span><br><span class="line">  if (isA) &#123;</span><br><span class="line">    i &#x3D; val.length</span><br><span class="line">    while (i--) _traverse(val[i], seen)</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    keys &#x3D; Object.keys(val)</span><br><span class="line">    i &#x3D; keys.length</span><br><span class="line">    while (i--) _traverse(val[keys[i]], seen)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>很清晰，对传入对watch对象进行递归遍历，因为递归有一定对性能开销，因此，我们一定要在合适的场景去设置deep。</p>
+<h3 id="user-watcher"><a href="#user-watcher" class="headerlink" title="user watcher"></a>user watcher</h3><p>就是用户手写的watch监听，前面讲过了，略过。</p>
+<h3 id="computed-watcher"><a href="#computed-watcher" class="headerlink" title="computed watcher"></a>computed watcher</h3><p>为计算属性量身定制的监听，具有“缓存”功效，前面讲过了，略过。</p>
+<h3 id="sync-watcher"><a href="#sync-watcher" class="headerlink" title="sync watcher"></a>sync watcher</h3><p>在我们之前对 setter 的分析过程知道，当响应式数据发送变化后，触发了 watcher.update()，只是把这个 watcher 推送到一个队列中，在 nextTick 后才会真正执行 watcher 的回调函数。而一旦我们设置了 sync，就可以在当前 Tick 中同步执行 watcher 的回调函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">update () &#123;</span><br><span class="line">    if (this.lazy) &#123;</span><br><span class="line">      this.dirty &#x3D; true</span><br><span class="line">    &#125; else if (this.sync) &#123;</span><br><span class="line">      &#x2F;* 执行Watcher回调，触发视图更新 *&#x2F;</span><br><span class="line">      this.run()</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      queueWatcher(this)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>因此只有当我们需要 watch 的值的变化到执行 watcher 的回调函数是一个同步过程的时候才会去设置该属性为 true。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>计算属性和监听属性都是通过Watcher这个类去实现当，本身都具有监听数据的能力。<br><strong>计算属性</strong>：计算属性本质上是 computed watcher，计算属性适合用在模板渲染中，某个值是依赖了其它的响应式对象甚至是计算属性计算而来，它具有缓存能力，当依赖的值没有变化甚至是计算结果没有发生变化，触发更新的回调则不会执行；<br><strong>监听属性</strong>：侦听属性本质上是 user watcher，适用于观测某个值的变化去完成一段复杂的业务逻辑，当新老值相同，也不会去触发更新回调。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/vue/">vue</a><a class="post-meta__tags" href="/tags/%E6%BA%90%E7%A0%81/">源码</a></div><div class="post_share"><div class="social-share" data-image="https://s3.ax1x.com/2021/02/26/yzTpOP.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/09/Vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8BnextTick/"><img class="prev-cover" src="https://s3.ax1x.com/2021/02/26/yzTpOP.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vue源码解析之nextTick</div></div></a></div><div class="next-post pull-right"><a href="/2020/11/06/vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8B%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/"><img class="next-cover" src="https://s3.ax1x.com/2021/02/26/yzTpOP.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">vue源码解析之响应式原理</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/11/09/Vue源码解析之nextTick/" title="Vue源码解析之nextTick"><img class="cover" src="https://s3.ax1x.com/2021/02/26/yzTpOP.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-09</div><div class="title">Vue源码解析之nextTick</div></div></a></div><div><a href="/2020/11/06/vue源码解析之响应式原理/" title="vue源码解析之响应式原理"><img class="cover" src="https://s3.ax1x.com/2021/02/26/yzTpOP.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-06</div><div class="title">vue源码解析之响应式原理</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://s3.ax1x.com/2021/02/26/yzIbCj.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">想过好生活的大蛋</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sbcdyb123"><i class="fab fa-github"></i><span>欢迎光临 ~~</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#computed"><span class="toc-number">2.1.</span> <span class="toc-text">computed</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#watch"><span class="toc-number">2.2.</span> <span class="toc-text">watch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Watcher-Options"><span class="toc-number">2.3.</span> <span class="toc-text">Watcher Options</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#deep-watcher"><span class="toc-number">2.3.1.</span> <span class="toc-text">deep watcher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#user-watcher"><span class="toc-number">2.3.2.</span> <span class="toc-text">user watcher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#computed-watcher"><span class="toc-number">2.3.3.</span> <span class="toc-text">computed watcher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sync-watcher"><span class="toc-number">2.3.4.</span> <span class="toc-text">sync watcher</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/02/10/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="2021面试复习笔记"><img src="https://s3.ax1x.com/2021/02/26/yzTEWj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2021面试复习笔记"/></a><div class="content"><a class="title" href="/2021/02/10/2021%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="2021面试复习笔记">2021面试复习笔记</a><time datetime="2021-02-09T16:00:00.000Z" title="发表于 2021-02-10 00:00:00">2021-02-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/09/Vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8BnextTick/" title="Vue源码解析之nextTick"><img src="https://s3.ax1x.com/2021/02/26/yzTpOP.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue源码解析之nextTick"/></a><div class="content"><a class="title" href="/2020/11/09/Vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8BnextTick/" title="Vue源码解析之nextTick">Vue源码解析之nextTick</a><time datetime="2020-11-09T11:30:36.000Z" title="发表于 2020-11-09 19:30:36">2020-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/07/vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8B%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7VS%E7%9B%91%E5%90%AC%E5%B1%9E%E6%80%A7/" title="VUE源码之计算属性和监听属性，到底该用谁？"><img src="https://s3.ax1x.com/2021/02/26/yzTpOP.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="VUE源码之计算属性和监听属性，到底该用谁？"/></a><div class="content"><a class="title" href="/2020/11/07/vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8B%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7VS%E7%9B%91%E5%90%AC%E5%B1%9E%E6%80%A7/" title="VUE源码之计算属性和监听属性，到底该用谁？">VUE源码之计算属性和监听属性，到底该用谁？</a><time datetime="2020-11-07T12:45:15.000Z" title="发表于 2020-11-07 20:45:15">2020-11-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/06/vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8B%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" title="vue源码解析之响应式原理"><img src="https://s3.ax1x.com/2021/02/26/yzTpOP.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue源码解析之响应式原理"/></a><div class="content"><a class="title" href="/2020/11/06/vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E4%B9%8B%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" title="vue源码解析之响应式原理">vue源码解析之响应式原理</a><time datetime="2020-11-06T10:21:41.000Z" title="发表于 2020-11-06 18:21:41">2020-11-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/08/16/uniapp/" title="uni-app小程序蓝牙打印踩坑之路"><img src="https://s3.ax1x.com/2021/02/26/yzTEWj.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="uni-app小程序蓝牙打印踩坑之路"/></a><div class="content"><a class="title" href="/2020/08/16/uniapp/" title="uni-app小程序蓝牙打印踩坑之路">uni-app小程序蓝牙打印踩坑之路</a><time datetime="2020-08-16T08:20:58.000Z" title="发表于 2020-08-16 16:20:58">2020-08-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 想过好生活的大蛋</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 't4GMSXxsaNhuBYa2J6yRntbU-gzGzoHsz',
+      appKey: 'Bbqu52lJrSoFtH45XyOJpzLL',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="富强,民主,文明,和谐,自由,平等,公正,法制,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
